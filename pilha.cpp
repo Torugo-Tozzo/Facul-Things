@@ -8,7 +8,10 @@ struct id{
 };
 
 /*
-cout << "pergunta" << cin /*scanf*/ << endl; 
+int x;
+    cout << "tamanho do pal?" << endl;
+    cin >> x;
+    cout << "seu pau tem "<<x<< "cms \n";
 */
 
 int main (void){
