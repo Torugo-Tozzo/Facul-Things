@@ -7,6 +7,9 @@ struct id{
     int valor;
 };
 
+/*
+cout << "pergunta" << cin /*scanf*/ << endl; 
+*/
 
 int main (void){
     id vetor[3] = {7851, 1,3527,2,9363,3};
