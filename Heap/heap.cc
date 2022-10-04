@@ -11,7 +11,7 @@ void HeapSort(int a[],int b[],int c[]){
         for (int j = 0; j < 5;){
             if(a[i]<b[j]){
             printf("%d \n",a[i]);
-            i++;
+            if(i < 3){i++;}
             }
             else{
             printf("%d \n",b[j]);
