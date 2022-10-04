@@ -9,9 +9,9 @@ struct id{
 
 /*
 int x;
-    cout << "tamanho do pal?" << endl;
+    cout << "idade?" << endl;
     cin >> x;
-    cout << "seu pau tem "<<x<< "cms \n";
+    cout << "vc tem "<<x<< "anos \n";
 */
 
 int main (void){
