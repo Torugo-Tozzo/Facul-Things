@@ -1,16 +1,11 @@
-from inspect import _void
 from pytube import YouTube
 
-link = "https://youtu.be/g1Hb8FDs-hA"
+link = input("Link ou Url : ")
 yt = YouTube(link)
-print(yt.title)
 
-#videos = yt.streams.all()
-videos = yt.streams.filter(only_audio=True)
-vid = (enumerate(videos))
-for i in vid:
-    print(i)
+print(yt.title + "\n\nBaixando...")
 
-strm = int(input("enter : "))
-videos[strm].download()
-print('Done!')
+yd = yt.streams.get_highest_resolution()
+yd.download(filename=yt.title + '.mp3',)
+
+print("Sucesso!")
