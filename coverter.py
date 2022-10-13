@@ -1,9 +1,8 @@
-#Partes comentadas = imagem pra colocar no arquivo.mp3
-
-
+import cmd
 from pytube import YouTube
-#import wget
-#import eyed3
+import os
+import wget
+import eyed3
 #from eyed3.id3.frames import ImageFrame
 
 link = input("Link ou Url : ")
@@ -12,13 +11,26 @@ yt = YouTube(link)
 print(yt.title + "\n\nBaixando...")
 
 yd = yt.streams.get_audio_only()
-yd.download(filename=yt.title + ".mp3")
+yd.download(filename ='generico.mp4')
+image_filename = wget.download(yt.thumbnail_url)
 
-#image_filename = wget.download(yt.thumbnail_url)
-#file = yt.title + ".mp3"
-#f = eyed3.load(file)
-#f.initTag()
-#f.tag.images.set(3, open("sddefault.jpg", 'rb').read(), 'image/jpeg')
-#f.tag.save()
+base_dir = "C:/Users/Karat/Documents/PastaProgramas/.vscode/"
+mp4_file = base_dir + 'generico.mp4'
+mp3_file = base_dir + 'generico.mp3'
 
-print("completo! "+ yt.title + ".mp3" +" baixado com sucesso!")
+cmd = 'ffmpeg -i '+ mp4_file + ' -vn ' + mp3_file
+os.system(cmd)
+
+file = 'generico.mp3'
+
+f = eyed3.load(file)
+f.initTag()
+f.tag.images.set(3, open("sddefault.jpg", 'rb').read(), 'image/jpeg')
+f.tag.save()
+
+oldname = "C:/Users/Karat/Documents/PastaProgramas/.vscode/generico.mp3"
+newname = "C:/Users/Karat/Documents/PastaProgramas/.vscode/" + yt.title+".mp3"
+os.rename(oldname, newname)
+os.remove("C:/Users/Karat/Documents/PastaProgramas/.vscode/sddefault.jpg")
+
+print("completo! "+ mp3_file +" baixado com sucesso!")
