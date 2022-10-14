@@ -3,7 +3,6 @@ from pytube import YouTube
 import os
 import wget
 import eyed3
-#from eyed3.id3.frames import ImageFrame
 
 link = input("Link ou Url : ")
 yt = YouTube(link)
@@ -14,7 +13,7 @@ print(yt.title + "\n\nBaixando...")
 yd = yt.streams.get_audio_only()
 yd.download(filename ='generico.mp4')
 image_filename = wget.download(yt.thumbnail_url)
-#my base_dir:C:/Users/Karat/Documents/PastaProgramas/.vscode/
+
 #base_dir = "C:/Users/Karat/Documents/PastaProgramas/.vscode/"
 
 mp4_file = base_dir + 'generico.mp4'
