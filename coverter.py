@@ -33,5 +33,6 @@ oldname = base_dir + "generico.mp3"
 newname = base_dir + yt.title+".mp3"
 os.rename(oldname, newname)
 os.remove(base_dir + "sddefault.jpg")
+os.remove(base_dir + "generico.mp4")
 
 print("completo! "+ mp3_file +" baixado com sucesso!")
