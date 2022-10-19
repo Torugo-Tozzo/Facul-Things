@@ -16,3 +16,5 @@ bd[i]->marca;
 cada *p aponta um struct
 
 if *p = NULL //ngm alocado ali
+
+busca inserção e remoção ----- busca um veiculo e exclui
