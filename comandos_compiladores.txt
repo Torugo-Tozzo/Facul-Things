@@ -1,0 +1,10 @@
+. . . d e f i n i c o e s . . .
+%%
+. . . r e g r a s . . .
+%%
+. . . s u b r o ti n a s . . .
+
+
+flex -o programa.c prgrama.l
+gcc programa.c -o programa
+./programa
