@@ -1,0 +1,18 @@
+abre o arquivo p/ leitura
+
+alocar a lista de ponteiros para structs(50  veiculos)
+
+pra cada linha do arquivo alocar uma struct e inserir os valores
+
+fazer um print dos valores na tela
+
+bd[i] = new Veiculo;
+bd[i]->modelo;
+bd[i]->marca;
+...
+
+50 *ponteiros // 0-49
+
+cada *p aponta um struct
+
+if *p = NULL //ngm alocado ali
