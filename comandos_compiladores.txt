@@ -7,4 +7,4 @@
 
 flex -o programa.c prgrama.l
 gcc programa.c -o programa
-./programa
+./programa < "aquivo qualquer a ser analisado"
