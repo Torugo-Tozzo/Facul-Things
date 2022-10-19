@@ -91,24 +91,6 @@ int main(int argc, char**argv){
     exclui(bd,tam,30);
     cout << " valor: " << bd[30] << " \n";
 
-
-    //BUSCA    
-    // for(int j = 0; j < tam; j++ ){
-    //     //oq vai ser buscado (placa)
-    //     string exemplo = "MAN7774"; 
-
-    //     if (bd[j]->placa == exemplo)
-    //     {
-    //         cout << "encontrado na posição = " << j << " ! ";
-    //     }
-        
-    // }
-
-    //DELETA 
-    // for (int i = 0; i < tam; i++){
-    //     delete (bd[i]);
-    //     }
-    
     }
     else
          cout << "unable to open the file";
