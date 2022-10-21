@@ -45,32 +45,27 @@ void exclui(Veiculo *bd[],int tam,string ex){
     //delete(bd[tam-1]);
     //delete(bd[j]);
 }
-int insere(Veiculo *bd[], int tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac){
-    for (int i = 0; i < tam ; i++){
-        if (bd[i] == NULL){
-        // trocar bd[i] NULL por bd[1] CONTEUDO
-            bd[i] = new Veiculo; 
-            bd[i]->modelo = model;
-            bd[i]->marca = marc;
-            bd[i]->versao = ver;
-            bd[i]->ano = an;
-            bd[i]->motor = mot; 
-            bd[i]->kilometragem = kilo; 
-            bd[i]->consumo = con; 
-            bd[i]->moua = mou; 
-            bd[i]->direcao = dire; 
-            bd[i]->cor = tinta; 
-            bd[i]->portas = port;  
-            bd[i]->placa = plac; 
-        i = tam;    
+int insere(Veiculo *bd[], int tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac){  
+        if (bd[tam] == NULL){
+            bd[tam] = new Veiculo; 
+            bd[tam]->modelo = model;
+            bd[tam]->marca = marc;
+            bd[tam]->versao = ver;
+            bd[tam]->ano = an;
+            bd[tam]->motor = mot; 
+            bd[tam]->kilometragem = kilo; 
+            bd[tam]->consumo = con; 
+            bd[tam]->moua = mou; 
+            bd[tam]->direcao = dire; 
+            bd[tam]->cor = tinta; 
+            bd[tam]->portas = port;  
+            bd[tam]->placa = plac;     
         tam++;
-        }
+        
     }
     return tam;
 }
         
-
-
 int main(int argc, char**argv){
  
     string line;
@@ -121,10 +116,17 @@ int main(int argc, char**argv){
     //exclui(bd,tam,placa);
     insere(bd,tam,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE");
 
-    cout << "ano do carro excluído " << bd[31]->ano << ".\n";
-    cout << "ano do carro excluído " << bd[32]->ano << ".\n"; 
+    cout << "\n posição 31: " << bd[31] << ".\n";
+    cout << " posição 32: " << bd[32] << ".\n";
+    //cout << "ano do carro excluído " << bd[32]->ano << ".\n"; 
 
     cout << "tam = " << tam <<"\n";
+    cout << "bd[tam-1] = "<< bd[tam-1];
+    cout << "\nbd[tam] = "<< bd[tam];
+
+    cout << "\n posição 31 " << bd[31]<< ".\n";
+    cout << " posição 32 " << bd[32]->ano<< ".\n";
+
     }
     else
          cout << "unable to open the file";
