@@ -22,6 +22,7 @@ Veiculo *bd[50];
 
 
 int r;
+int newtam;
 
 int busca(Veiculo *bd[],int tam,string exemplo){
     //BUSCA    
@@ -60,17 +61,21 @@ int insere(Veiculo *bd[], int tam,string model,string marc,string ver,string an,
             bd[tam]->cor = tinta; 
             bd[tam]->portas = port;  
             bd[tam]->placa = plac;     
-        tam++;
+        newtam = tam + 1; 
+        
         
     }
-    return tam;
+    return newtam;
 }
         
 int main(int argc, char**argv){
  
     string line;
+
     ifstream myfile("BD_veiculos.txt");
+
     int tam = 0;
+
     if(myfile.is_open()){
         while (!myfile.eof())
         {
@@ -120,12 +125,24 @@ int main(int argc, char**argv){
     cout << " posição 32: " << bd[32] << ".\n";
     //cout << "ano do carro excluído " << bd[32]->ano << ".\n"; 
 
-    cout << "tam = " << tam <<"\n";
-    cout << "bd[tam-1] = "<< bd[tam-1];
+    cout << "newtam = " << newtam <<"\n";
+
     cout << "\nbd[tam] = "<< bd[tam];
 
-    cout << "\n posição 31 " << bd[31]<< ".\n";
-    cout << " posição 32 " << bd[32]->ano<< ".\n";
+    for(int j = 0; j < newtam; j++ ){
+            cout << bd[j]->modelo << " ";
+            cout << bd[j]->marca << " ";
+            cout << bd[j]->versao << " ";
+            cout << bd[j]->ano << " ";
+            cout << bd[j]->kilometragem << " "; 
+            cout << bd[j]->motor << " "; 
+            cout << bd[j]->consumo << " "; 
+            cout << bd[j]->moua << " "; 
+            cout << bd[j]->direcao << " "; 
+            cout << bd[j]->cor << " "; 
+            cout << bd[j]->portas << " ";  
+            cout << bd[j]->placa << endl; 
+        }
 
     }
     else
