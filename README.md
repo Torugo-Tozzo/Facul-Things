@@ -1,2 +1,0 @@
-# Facul-Things
-Nome
