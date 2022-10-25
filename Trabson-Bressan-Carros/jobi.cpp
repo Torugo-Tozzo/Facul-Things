@@ -140,13 +140,13 @@ int main(int argc, char**argv){
         string aninho;cout << "ano";cin >> aninho;
         string kilometrinho;cout << "kilometragem";cin >> kilometrinho;
         string motorzim;cout << "motor(ex: 1.0 2.0 1.6....)";cin >> motorzim;
-        string conzinho;cout << "";cin >>conzinho;
-        string mouzinho;cout << "";cin >> ;
-        string direzinha;cout << "";cin >> ;
-        string modelim;cout << "";cin >> ;
-        string modelim;cout << "";cin >> ;
-        string modelim;cout << "";cin >> ;
-        string modelim;cout << "";cin >> ;
+        string conzinho;cout << "flex? gasolina?";cin >>conzinho;
+        string mouzinho;cout << "manual ou automatico?";cin >> mouzinho;
+        string direzinha;cout << "direção?";cin >> direzinha;
+        string corzinha;cout << "cor:";cin >> corzinha;
+        string portinha;cout << "portas:";cin >> portinha;
+        string plaquinha;cout << "placa";cin >> plaquinha;
+        string precim;cout << "preço:";cin >> precim;
         insere(bd,tam,modelim,marquinha,versaozinha,aninho,kilometrinho,motorzim,conzinho,mouzinho,direzinha,corzinha,portinha,plaquinha,precim);
         break;
     case 3:
