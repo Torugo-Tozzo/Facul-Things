@@ -43,7 +43,8 @@ int exclui(Veiculo *bd[],int *tam,string ex){
     bd[busca(bd,*tam,ex)];
     if (r == -1){
         cout << "\nNão exite chefe\n";
-    }else
+    }
+    else{
     bd[r] = NULL;
     for (int i = r; i < *tam; i++)
     {
@@ -51,7 +52,7 @@ int exclui(Veiculo *bd[],int *tam,string ex){
     
     *tam = *tam-1;
     }
-
+    }
 }
 int insere(Veiculo *bd[], int tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,string prec){  
         if (bd[tam] == NULL){
