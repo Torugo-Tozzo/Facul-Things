@@ -44,6 +44,7 @@ void exclui(Veiculo *bd[],int tam,string ex){
     {
         bd[i] = bd[i+1];
     }
+    newtam = tam - 1;
     //delete(bd[tam-1]);
     //delete(bd[j]);
 }
@@ -122,11 +123,24 @@ int main(int argc, char**argv){
     cout << "placa do veiculo a ser buscado:";
     cin >> placa1;
     
-    while(int c =! 1){
+    //while(int c = 0){
     int condition;
-    cout << "faz oq com esse veiculo patrão? \n1 = exclui. \n2 = buscar outra lata velha. \n3 = add um veiculo \n 4 ou qualquer otro num = sair";
+    cout << "faz oq com esse veiculo patrão? \n1 = exclui. \n2 = add uma lata velha. \n3 = kitar \n ";
     cin >> condition;
-    
+
+    string md;
+    string mar;
+    string ver;
+    string year;
+    string kms;
+    string pot;
+    string con;
+    string moa;
+    string dir;
+    string color;
+    string door;
+    string plaq;
+    string price;
     
     switch (condition)
     {
@@ -134,28 +148,31 @@ int main(int argc, char**argv){
         exclui(bd,tam,placa1);
         break;
     case 2:
-        string modelim;cout << "modelo";cin >> modelim;
-        string marquinha;cout << "marca";cin >> marquinha;
-        string versaozinha;cout << "versao (ex:hat sedan SUV....)";cin >> versaozinha;
-        string aninho;cout << "ano";cin >> aninho;
-        string kilometrinho;cout << "kilometragem";cin >> kilometrinho;
-        string motorzim;cout << "motor(ex: 1.0 2.0 1.6....)";cin >> motorzim;
-        string conzinho;cout << "flex? gasolina?";cin >>conzinho;
-        string mouzinho;cout << "manual ou automatico?";cin >> mouzinho;
-        string direzinha;cout << "direção?";cin >> direzinha;
-        string corzinha;cout << "cor:";cin >> corzinha;
-        string portinha;cout << "portas:";cin >> portinha;
-        string plaquinha;cout << "placa";cin >> plaquinha;
-        string precim;cout << "preço:";cin >> precim;
-        insere(bd,tam,modelim,marquinha,versaozinha,aninho,kilometrinho,motorzim,conzinho,mouzinho,direzinha,corzinha,portinha,plaquinha,precim);
+        cout << "modelo";cin >> md;
+        cout << "marca";cin >> mar;
+        cout << "versao (ex:hat sedan SUV....)";cin >> ver;
+        cout << "ano";cin >> year;
+        cout << "kilometragem";cin >> kms;
+        cout << "motor(ex: 1.0 2.0 1.6....)";cin >> pot;
+        cout << "flex? gasolina?";cin >>con;
+        cout << "manual ou automatico?";cin >> moa;
+        cout << "direção?";cin >> dir;
+        cout << "cor:";cin >> color;
+        cout << "portas:";cin >> door;
+        cout << "placa";cin >> plaq;
+        cout << "preço:";cin >> price;
+        insere(bd,tam,md,mar,ver,year,kms,pot,con,moa,dir,color,door,plaq,price);
         break;
     case 3:
+        printf("flw");
+        //c=1;
         break;
     
     default:
+        printf("?");
         break;
     }
-    }
+    //}
     //busca(bd, tam, placa);
     //exclui(bd,tam,placa);
     //insere(bd,tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","GAY2469","BARATINHO");
@@ -164,10 +181,25 @@ int main(int argc, char**argv){
     //cout << " posição 32: " << bd[32] << ".\n";
     //cout << "ano do carro excluído " << bd[32]->ano << ".\n"; 
 
-    //cout << "newtam = " << newtam <<"\n";
+    cout << "newtam = " << newtam <<"\n";
 
     //cout << "\nbd[tam] = "<< bd[tam];
 
+    // for(int j = 0; j < newtam; j++ ){
+    //         cout << bd[j]->modelo << " ";
+    //         cout << bd[j]->marca << " ";
+    //         cout << bd[j]->versao << " ";
+    //         cout << bd[j]->ano << " ";
+    //         cout << bd[j]->kilometragem << " "; 
+    //         cout << bd[j]->motor << " "; 
+    //         cout << bd[j]->consumo << " "; 
+    //         cout << bd[j]->moua << " "; 
+    //         cout << bd[j]->direcao << " "; 
+    //         cout << bd[j]->cor << " "; 
+    //         cout << bd[j]->portas << " ";
+    //         cout << bd[j]->placa << " ";  
+    //         cout << bd[j]->preco << endl; 
+    //     }
     for(int j = 0; j < newtam; j++ ){
             cout << bd[j]->modelo << " ";
             cout << bd[j]->marca << " ";
