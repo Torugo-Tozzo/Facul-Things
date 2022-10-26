@@ -54,27 +54,25 @@ int exclui(Veiculo *bd[],int *tam,string ex){
     }
     }
 }
-int insere(Veiculo *bd[], int tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,string prec){  
-        if (bd[tam] == NULL){
-            bd[tam] = new Veiculo; 
-            bd[tam]->modelo = model;
-            bd[tam]->marca = marc;
-            bd[tam]->versao = ver;
-            bd[tam]->ano = an;
-            bd[tam]->motor = mot; 
-            bd[tam]->kilometragem = kilo; 
-            bd[tam]->consumo = con; 
-            bd[tam]->moua = mou; 
-            bd[tam]->direcao = dire; 
-            bd[tam]->cor = tinta; 
-            bd[tam]->portas = port;  
-            bd[tam]->placa = plac; 
-            bd[tam]->preco = prec;    
-        tam++; 
-        
-        
+int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,string prec){  
+        if (bd[*tam] == NULL){
+            bd[*tam] = new Veiculo; 
+            bd[*tam]->modelo = model;
+            bd[*tam]->marca = marc;
+            bd[*tam]->versao = ver;
+            bd[*tam]->ano = an;
+            bd[*tam]->motor = mot; 
+            bd[*tam]->kilometragem = kilo; 
+            bd[*tam]->consumo = con; 
+            bd[*tam]->moua = mou; 
+            bd[*tam]->direcao = dire; 
+            bd[*tam]->cor = tinta; 
+            bd[*tam]->portas = port;  
+            bd[*tam]->placa = plac; 
+            bd[*tam]->preco = prec;    
+        *tam = *tam +1;
     }
-    return tam;
+    
 }
         
 int main(int argc, char**argv){
@@ -124,18 +122,16 @@ int main(int argc, char**argv){
     for(int i = tam; i < 50;i++){
         bd[i] = NULL;
     }
-    exclui(bd,&tam,"BEIFESB");
+    //exclui(bd,&tam,"BEIFESB");
     cout << "tam = " << tam <<"\n";
 
     // string placa1;
     // cout << "placa do veiculo a ser buscado:";
     // cin >> placa1;
-    
     //while(int c = 0){
     // int condition;
     // cout << "faz oq com esse veiculo patrão? \n1 = exclui. \n2 = add uma lata velha. \n3 = kitar \n ";
     // cin >> condition;
-
     // string md;
     // string mar;
     // string ver;
@@ -149,7 +145,6 @@ int main(int argc, char**argv){
     // string door;
     // string plaq;
     // string price;
-    
     // switch (condition)
     // {
     // case 1:
@@ -175,23 +170,18 @@ int main(int argc, char**argv){
     //     printf("flw");
     //     //c=1;
     //     break;
-    
     // default:
     //     printf("?");
     //     break;
     // }
-
     //}
     //busca(bd, tam, placa);
     //exclui(bd,tam,placa);
-    //insere(bd,tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","GAY2469","BARATINHO");
-
+    insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","GAY2469","BARATINHO");
     //cout << "\n posição 31: " << bd[31] << ".\n";
     //cout << " posição 32: " << bd[32] << ".\n";
     //cout << "ano do carro excluído " << bd[32]->ano << ".\n"; 
-
     //cout << "\nbd[tam] = "<< bd[tam];
-
     // for(int j = 0; j < newtam; j++ ){
     //         cout << bd[j]->modelo << " ";
     //         cout << bd[j]->marca << " ";
@@ -207,6 +197,7 @@ int main(int argc, char**argv){
     //         cout << bd[j]->placa << " ";  
     //         cout << bd[j]->preco << endl; 
     //     }
+    
     for(int j = 0; j < tam; j++ ){
             cout << bd[j]->modelo << " ";
             cout << bd[j]->marca << " ";
