@@ -78,11 +78,11 @@ int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an
     
 }
 
-int ordena(Veiculo *bd[],int tam,float preco,float aux[]){
+int ordena(Veiculo *bd[],int tam,float aux[]){
     for (int i = 0; i < tam; i++){
        aux[i] = bd[i]->preco;   
     }
-    sort(&aux[0],&aux[tam-1]);
+    sort(&aux[0],&aux[tam]);
     return 0;
 }      
 int main(int argc, char**argv){
@@ -187,9 +187,9 @@ int main(int argc, char**argv){
     //}
     //busca(bd, tam, placa);
     //exclui(bd,tam,placa);
-    insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","GAY2469",1.00);
+    insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","GAY2469",1783.00);
     
-    ordena(bd,tam,66671.00,aux);
+    ordena(bd,tam,aux);
     
 
     for(int j = 0; j < tam; j++ ){
