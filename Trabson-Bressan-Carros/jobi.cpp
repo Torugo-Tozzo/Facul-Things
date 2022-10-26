@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -16,11 +19,11 @@ typedef struct Veiculo{
     string cor;
     string portas;
     string placa;
-    string preco;
+    float preco;
 
 };
 Veiculo *bd[50];
-
+float aux[50];
 
 int r;
 int newtam;
@@ -54,7 +57,7 @@ int exclui(Veiculo *bd[],int *tam,string ex){
     }
     }
 }
-int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,string prec){  
+int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,float prec){  
         if (bd[*tam] == NULL){
             bd[*tam] = new Veiculo; 
             bd[*tam]->modelo = model;
@@ -74,7 +77,14 @@ int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an
     }
     
 }
-        
+
+int ordena(Veiculo *bd[],int tam,float preco,float aux[]){
+    for (int i = 0; i < tam; i++){
+       aux[i] = bd[i]->preco;   
+    }
+    sort(&aux[0],&aux[tam-1]);
+    return 0;
+}      
 int main(int argc, char**argv){
  
     string line;
@@ -177,27 +187,11 @@ int main(int argc, char**argv){
     //}
     //busca(bd, tam, placa);
     //exclui(bd,tam,placa);
-    insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","GAY2469","BARATINHO");
-    //cout << "\n posição 31: " << bd[31] << ".\n";
-    //cout << " posição 32: " << bd[32] << ".\n";
-    //cout << "ano do carro excluído " << bd[32]->ano << ".\n"; 
-    //cout << "\nbd[tam] = "<< bd[tam];
-    // for(int j = 0; j < newtam; j++ ){
-    //         cout << bd[j]->modelo << " ";
-    //         cout << bd[j]->marca << " ";
-    //         cout << bd[j]->versao << " ";
-    //         cout << bd[j]->ano << " ";
-    //         cout << bd[j]->kilometragem << " "; 
-    //         cout << bd[j]->motor << " "; 
-    //         cout << bd[j]->consumo << " "; 
-    //         cout << bd[j]->moua << " "; 
-    //         cout << bd[j]->direcao << " "; 
-    //         cout << bd[j]->cor << " "; 
-    //         cout << bd[j]->portas << " ";
-    //         cout << bd[j]->placa << " ";  
-    //         cout << bd[j]->preco << endl; 
-    //     }
+    insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","GAY2469",1.00);
     
+    ordena(bd,tam,66671.00,aux);
+    
+
     for(int j = 0; j < tam; j++ ){
             cout << bd[j]->modelo << " ";
             cout << bd[j]->marca << " ";
@@ -213,6 +207,11 @@ int main(int argc, char**argv){
             cout << bd[j]->placa << " ";  
             cout << bd[j]->preco << endl; 
         }
+    for (int i = 0; i < tam; i++)
+    {
+        cout << aux[i] <<"\n";
+    }
+    
 
     }
     else
