@@ -47,7 +47,6 @@ void imprime(Veiculo *bd[],int tam){
             cout << bd[j]->preco << endl; 
         }
 }
-
 int busca(Veiculo *bd[],int tam,string exemplo){
     //BUSCA    
     for(int j = 0; j < tam; j++ ){
@@ -94,7 +93,6 @@ int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an
     }
     return 0;   
 }
-
 int ordprecos(Veiculo *bd[],int tam,float vetprecos[]){
     for (int i = 0; i < tam; i++){
        vetprecos[i] = bd[i]->preco;   
@@ -110,29 +108,12 @@ int ordplacas(Veiculo *bd[],int tam,string vetplacas[]){
     }
     sort(&vetplacas[0],&vetplacas[tam]);
     return 0;
-} 
-// int custos(Veiculo *bd[],int tam,float vetprecos[],float exemplo){
-//     for (int i = 0; i < tam; i++){
-//         if (exemplo == vetprecos[i]){
-//             for (int n = 1; n < 11; n++){
-//                 if (i-n >0)
-//                 {
-                    
-//                 }
-                
-                
-//             }
-//         } 
-//     } 
-// }    
+}  
 int main(int argc, char**argv){
  
     string line;
-
     ifstream myfile("BD_veiculos_2.txt");
-
     int tam = 0;
-
     if(myfile.is_open()){
         while (!myfile.eof())
         {
@@ -172,16 +153,14 @@ int main(int argc, char**argv){
     for(int i = tam; i < 50;i++){
         bd[i] = NULL;
     }
-    //exclui(bd,&tam,"BEIFESB");    //placa q n existe
-    
-    // cout << "tam = " << tam <<"\n";
-
+   
     string placa1;
-    
+
     int c;
+
     while(c != 5){
     for(int i = 0;i != 1;){
-    cout << "placa do veiculo a ser buscado:";
+    cout << "\nplaca do veiculo a ser buscado:";
     cin >> placa1;
     busca(bd,tam,placa1);
     if(r != -1){
@@ -246,18 +225,12 @@ int main(int argc, char**argv){
         break;
     }
     }
-
-
     // busca(bd, tam, placa);
     // exclui(bd,tam,placa);
-
-    
     // insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","AAA1111",1783.00);
-    
     // ordprecos(bd,tam,vetprecos);
-    
     // ordplacas(bd,tam,vetplacas);
-
+    cout << "LISTA FINAL DE CARROS\n-----------------------------\n";
     for(int j = 0; j < tam; j++ ){
             cout << bd[j]->modelo << " ";
             cout << bd[j]->marca << " ";
@@ -273,9 +246,6 @@ int main(int argc, char**argv){
             cout << bd[j]->placa << " ";  
             cout << bd[j]->preco << endl; 
         }
-    // for (int i = 0; i < tam; i++){
-    //     cout << vetplacas[i] <<"\n";
-    // }
     }
     else
          cout << "unable to open the file";
