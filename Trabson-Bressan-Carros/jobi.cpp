@@ -135,21 +135,7 @@ int main(int argc, char**argv){
         tam++;
         }
         myfile.close();
-        for(int j = 0; j < tam; j++ ){
-            cout << bd[j]->modelo << " ";
-            cout << bd[j]->marca << " ";
-            cout << bd[j]->versao << " ";
-            cout << bd[j]->ano << " ";
-            cout << bd[j]->kilometragem << " "; 
-            cout << bd[j]->motor << " "; 
-            cout << bd[j]->consumo << " "; 
-            cout << bd[j]->moua << " "; 
-            cout << bd[j]->direcao << " "; 
-            cout << bd[j]->cor << " "; 
-            cout << bd[j]->portas << " "; 
-            cout << bd[j]->placa << " "; 
-            cout << bd[j]->preco << endl; 
-        }
+        imprime(bd,tam);
     for(int i = tam; i < 50;i++){
         bd[i] = NULL;
     }
@@ -231,21 +217,7 @@ int main(int argc, char**argv){
     // ordprecos(bd,tam,vetprecos);
     // ordplacas(bd,tam,vetplacas);
     cout << "LISTA FINAL DE CARROS\n-----------------------------\n";
-    for(int j = 0; j < tam; j++ ){
-            cout << bd[j]->modelo << " ";
-            cout << bd[j]->marca << " ";
-            cout << bd[j]->versao << " ";
-            cout << bd[j]->ano << " ";
-            cout << bd[j]->kilometragem << " "; 
-            cout << bd[j]->motor << " "; 
-            cout << bd[j]->consumo << " "; 
-            cout << bd[j]->moua << " "; 
-            cout << bd[j]->direcao << " "; 
-            cout << bd[j]->cor << " "; 
-            cout << bd[j]->portas << " ";
-            cout << bd[j]->placa << " ";  
-            cout << bd[j]->preco << endl; 
-        }
+    imprime(bd,tam);
     }
     else
          cout << "unable to open the file";
