@@ -6,7 +6,7 @@
 
 using namespace std;
 
-typedef struct Veiculo{
+struct Veiculo{
     string modelo;
     string marca;
     string versao;
@@ -20,16 +20,16 @@ typedef struct Veiculo{
     string portas;
     string placa;
     float preco;
-
 };
+
 Veiculo *bd[50];
-float aux[50];
+float vetprecos[50];
+string vetplacas[50];
 
 int r;
 int newtam;
 
-int busca(Veiculo *bd[],int tam,string exemplo){
-    //BUSCA    
+int busca(Veiculo *bd[],int tam,string exemplo){   
     for(int j = 0; j < tam; j++ ){
         //oq vai ser buscado (placa)
         if (bd[j]->placa == exemplo)
@@ -51,11 +51,11 @@ int exclui(Veiculo *bd[],int *tam,string ex){
     bd[r] = NULL;
     for (int i = r; i < *tam; i++)
     {
-        bd[i] = bd[i+1];
-    
+     bd[i] = bd[i+1];  
     *tam = *tam-1;
     }
     }
+    return 0;
 }
 int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,float prec){  
         if (bd[*tam] == NULL){
@@ -75,16 +75,25 @@ int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an
             bd[*tam]->preco = prec;    
         *tam = *tam +1;
     }
-    
+    return 0;   
 }
 
-int ordena(Veiculo *bd[],int tam,float aux[]){
+int ordprecos(Veiculo *bd[],int tam,float vetprecos[]){
     for (int i = 0; i < tam; i++){
-       aux[i] = bd[i]->preco;   
+       vetprecos[i] = bd[i]->preco;   
     }
-    sort(&aux[0],&aux[tam]);
+    sort(&vetprecos[0],&vetprecos[tam]);
+
     return 0;
-}      
+} 
+int ordplacas(Veiculo *bd[],int tam,string vetplacas[]){
+    for (int i = 0; i < tam; i++)
+    {
+        vetplacas[i]=bd[i]->placa;
+    }
+    sort(&vetplacas[0],&vetplacas[tam]);
+    return 0;
+}  
 int main(int argc, char**argv){
  
     string line;
@@ -132,7 +141,7 @@ int main(int argc, char**argv){
     for(int i = tam; i < 50;i++){
         bd[i] = NULL;
     }
-    //exclui(bd,&tam,"BEIFESB");
+    //exclui(bd,&tam,"BEIFESB");    //placa q n existe
     cout << "tam = " << tam <<"\n";
 
     // string placa1;
@@ -187,10 +196,11 @@ int main(int argc, char**argv){
     //}
     //busca(bd, tam, placa);
     //exclui(bd,tam,placa);
-    insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","GAY2469",1783.00);
+    insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","AAA1111",1783.00);
     
-    ordena(bd,tam,aux);
+    ordprecos(bd,tam,vetprecos);
     
+    ordplacas(bd,tam,vetplacas);
 
     for(int j = 0; j < tam; j++ ){
             cout << bd[j]->modelo << " ";
@@ -209,9 +219,8 @@ int main(int argc, char**argv){
         }
     for (int i = 0; i < tam; i++)
     {
-        cout << aux[i] <<"\n";
+        cout << vetplacas[i] <<"\n";
     }
-    
 
     }
     else
