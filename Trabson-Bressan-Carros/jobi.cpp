@@ -25,6 +25,7 @@ struct Veiculo{
 
 Veiculo *bd[50];
 float vetprecos[50];
+float vex[11];
 string vetplacas[50];
 
 int r = -2;
@@ -73,6 +74,8 @@ int exclui(Veiculo *bd[],int *tam,string ex){
     cout << "carro na posição "<< r <<" excluido!\n";
     return 0;
 }
+
+
 int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,float prec){  
         if (bd[*tam] == NULL){
             bd[*tam] = new Veiculo; 
@@ -102,15 +105,32 @@ int ordprecos(Veiculo *bd[],int tam,float vetprecos[]){
     return 0;
 } 
 int ordplacas(Veiculo *bd[],int tam,string vetplacas[]){
-    for (int i = 0; i < tam; i++)
-    {
+    for (int i = 0; i < tam; i++){
         vetplacas[i]=bd[i]->placa;
     }
     sort(&vetplacas[0],&vetplacas[tam]);
     return 0;
-}  
+}
+int dezprox(float vetprecos[],int tam,float preco,float vex[]){
+    //  [0 1 2 3  4 (5) 6 7 8 9 10] - 11 elementos-10 precos pra comparar
+    int k;
+    for(int j = 0; j < tam; j++ ){
+        if (vetprecos[j] == preco){
+            k = j;
+            cout << "Encontrado na posição = " << j << ".\n";
+            j = tam; 
+        }}
+    vex[5] = vetprecos[k]; 
+    for (int i = 5; i > 0; i--){
+        if (k-i > 0){  
+            vex[(10/2)-i]= vetprecos[k-i];
+        }else{}  
+    }
+    
+}
+
+
 int main(int argc, char**argv){
- 
     string line;
     ifstream myfile("BD_veiculos_2.txt");
     int tam = 0;
@@ -156,7 +176,7 @@ int main(int argc, char**argv){
         cout << "placa não encontrada, tenta dnovo\n";}
     }    
     int condition;
-    cout << "faz oq com esse veiculo patrão? \n1 = exclui. \n2 = add uma lata velha. \n3 = mostrar as placas ordenadas. \n4 = buscar outra placa \n5 = kitar \n ";
+    cout << "faz oq com esse veiculo patrão? \n1 = exclui. \n2 = add uma lata velha. \n3 = mostrar as placas ordenadas. \n4 = buscar outra placa \n5 = mostrar 10 preços proximos\n6 = kitar \n ";
     cin >> condition;
     string md;
     string mar;
@@ -200,9 +220,11 @@ int main(int argc, char**argv){
     }
         break;
     case 4:
-
         break;
     case 5:
+        //dezprox(vetprecos,);
+        break;
+    case 6:
         printf("flw");
         c=5;
         break;
