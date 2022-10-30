@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -48,13 +49,28 @@ void imprime(Veiculo *bd[],int tam){
             cout << bd[j]->preco << endl; 
         }
 }
+void imprime1(Veiculo *bd[],int tam,int j){
+            cout << bd[j]->modelo << " ";
+            cout << bd[j]->marca << " ";
+            cout << bd[j]->versao << " ";
+            cout << bd[j]->ano << " ";
+            cout << bd[j]->kilometragem << " "; 
+            cout << bd[j]->motor << " "; 
+            cout << bd[j]->consumo << " "; 
+            cout << bd[j]->moua << " "; 
+            cout << bd[j]->direcao << " "; 
+            cout << bd[j]->cor << " "; 
+            cout << bd[j]->portas << " ";
+            cout << bd[j]->placa << " ";  
+            cout << bd[j]->preco << endl; 
+}
 int busca(Veiculo *bd[],int tam,string exemplo){
     //BUSCA    
     for(int j = 0; j < tam; j++ ){
         //oq vai ser buscado (placa)
         if (bd[j]->placa == exemplo){
             r = j;
-            cout << "Encontrado na posição = " << j << ".\n";
+            cout << "\nEncontrado na posição = " << j << ".\n";
             j = tam;
         }if(j == tam-1 && r == -2){ 
         r = -1;
@@ -71,10 +87,9 @@ int exclui(Veiculo *bd[],int *tam,string ex){
     }
     bd[*tam] = NULL;
     *tam = *tam-1;
-    cout << "carro na posição "<< r <<" excluido!\n";
+    cout << "cvetprecoso na posição "<< r <<" excluido!\n";
     return 0;
 }
-
 
 int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,float prec){  
         if (bd[*tam] == NULL){
@@ -98,10 +113,9 @@ int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an
 }
 int ordprecos(Veiculo *bd[],int tam,float vetprecos[]){
     for (int i = 0; i < tam; i++){
-       vetprecos[i] = bd[i]->preco;   
+       vetprecos[i] = bd[i]->preco;  
     }
     sort(&vetprecos[0],&vetprecos[tam]);
-
     return 0;
 } 
 int ordplacas(Veiculo *bd[],int tam,string vetplacas[]){
@@ -111,6 +125,7 @@ int ordplacas(Veiculo *bd[],int tam,string vetplacas[]){
     sort(&vetplacas[0],&vetplacas[tam]);
     return 0;
 }
+/*
 int dezprox(float vetprecos[],int tam,float preco,float vex[]){
     //  [0 1 2 3  4 (5) 6 7 8 9 10] - 11 elementos-10 precos pra comparar
     int k;
@@ -125,10 +140,25 @@ int dezprox(float vetprecos[],int tam,float preco,float vex[]){
         if (k-i > 0){  
             vex[(10/2)-i]= vetprecos[k-i];
         }else{}  
+    }   
+}*/
+void dezprox(float vetprecos[], int tam, float x,int k){
+    for (int i = 0; i < tam; i++){
+       vetprecos[i] = bd[i]->preco;  
     }
-    
+	priority_queue<pair<int, int> > pq;
+	for (int i = 0; i < k; i++)
+		pq.push({ abs(vetprecos[i] - x), i });
+	for (int i = k; i < tam; i++) {
+		float diff = abs(vetprecos[i] - x);
+		if (diff > pq.top().first)
+			continue;
+		pq.pop();
+		pq.push({ diff, i });}
+	while (pq.empty() == false) {
+		cout << vetprecos[pq.top().second] << " ";
+		pq.pop();}
 }
-
 
 int main(int argc, char**argv){
     string line;
@@ -176,7 +206,7 @@ int main(int argc, char**argv){
         cout << "placa não encontrada, tenta dnovo\n";}
     }    
     int condition;
-    cout << "faz oq com esse veiculo patrão? \n1 = exclui. \n2 = add uma lata velha. \n3 = mostrar as placas ordenadas. \n4 = buscar outra placa \n5 = mostrar 10 preços proximos\n6 = kitar \n ";
+    cout << "faz oq com esse veiculo patrão?\n0 = informações do veiculo.  \n1 = exclui. \n2 = adicionar um outro veiculo \n3 = mostrar as placas ordenadas. \n4 = mostrar 10 preços proximos\n5 = ver lista atual de todos os veiculos.\n6 = SAIR \n ";
     cin >> condition;
     string md;
     string mar;
@@ -193,24 +223,27 @@ int main(int argc, char**argv){
     float price;
     switch (condition)
     {
+    case 0:
+        imprime1(bd,tam,r);
+        break;
     case 1:
         exclui(bd,&tam,placa1);
         imprime(bd,tam);
         break;
     case 2:
-        cout << "modelo";cin >> md;
-        cout << "marca";cin >> mar;
-        cout << "versao (ex:hat sedan SUV....)";cin >> ver;
-        cout << "ano";cin >> year;
-        cout << "kilometragem";cin >> kms;
-        cout << "motor(ex: 1.0 2.0 1.6....)";cin >> pot;
-        cout << "flex? gasolina?";cin >>con;
-        cout << "manual ou automatico?";cin >> moa;
-        cout << "direção?";cin >> dir;
-        cout << "cor:";cin >> color;
-        cout << "n de portas::";cin >> door;
-        cout << "placa:";cin >> plaq;
-        cout << "preço:";cin >> price;
+        cout << "INSIRA: modelo:";cin >> md;
+        cout << "INSIRA: marca:";cin >> mar;
+        cout << "INSIRA: versao (ex:hat sedan SUV....):";cin >> ver;
+        cout << "INSIRA: ano:";cin >> year;
+        cout << "INSIRA: kilometragem:";cin >> kms;
+        cout << "INSIRA: motor(ex: 1.0 2.0 1.6....):";cin >> pot;
+        cout << "INSIRA: flex? gasolina?:";cin >>con;
+        cout << "INSIRA: manual ou automatico?:";cin >> moa;
+        cout << "INSIRA: direção?:";cin >> dir;
+        cout << "INSIRA: cor:";cin >> color;
+        cout << "INSIRA: n de portas:";cin >> door;
+        cout << "INSIRA: placa:";cin >> plaq;
+        cout << "INSIRA: preço:";cin >> price;
         insere(bd,&tam,md,mar,ver,year,kms,pot,con,moa,dir,color,door,plaq,price);
         break;
     case 3:
@@ -220,9 +253,10 @@ int main(int argc, char**argv){
     }
         break;
     case 4:
+        dezprox(vetprecos,tam,vetprecos[r],10);
         break;
     case 5:
-        //dezprox(vetprecos,);
+        imprime(bd,tam);
         break;
     case 6:
         printf("flw");
@@ -233,12 +267,8 @@ int main(int argc, char**argv){
         break;
     }
     }
-    // busca(bd, tam, placa);
-    // exclui(bd,tam,placa);
-    // insere(bd,&tam,"BIBACAR","HOULA","Sedã","2024","2.4","1111111","Flex","Automatico","Elétrica","Rosa","4","AAA1111",1783.00);
-    // ordprecos(bd,tam,vetprecos);
-    // ordplacas(bd,tam,vetplacas);
-    cout << "LISTA FINAL DE CARROS\n-----------------------------\n";
+    
+    cout << "LISTA FINAL DE VEICULOS\n-----------------------------\n";
     imprime(bd,tam);
     }
     else
