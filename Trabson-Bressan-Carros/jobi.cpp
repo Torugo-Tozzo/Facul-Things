@@ -165,7 +165,10 @@ void salva(Veiculo *bd[], int tam){
             myfile << bd[j]->cor << " "; 
             myfile << bd[j]->portas << " ";
             myfile << bd[j]->placa << " ";  
-            myfile << bd[j]->preco << endl; 
+            if(bd[j]==bd[tam-1])
+            {myfile << bd[j]->preco;} 
+            else
+            myfile << bd[j]->preco << endl;
         }}
 }
 
