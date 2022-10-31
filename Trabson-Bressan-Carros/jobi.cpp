@@ -200,19 +200,9 @@ int main(int argc, char**argv){
 
     int c;
 
-    while(c != 5){
-    for(int i = 0;i != 1;){
-    cout << "\nplaca do veiculo a ser buscado:";
-    cin >> placa1;
-    busca(bd,tam,placa1);
-    if(r != -1){
-        cout << "Achei o veiculo!\n";
-        i = 1;
-    }if(r == -1){
-        cout << "placa não encontrada, tenta dnovo\n";}
-    }    
+    while(c != 5){  
     int condition;
-    cout << "faz oq com esse veiculo patrão?\n0 = informações do veiculo.  \n1 = exclui. \n2 = adicionar um outro veiculo \n3 = mostrar as placas ordenadas. \n4 = mostrar 10 preços proximos\n5 = ver lista atual de todos os veiculos.\n6 = SAIR \n ";
+    cout << "q q manda, patrão?\n1 = busca(exluir/infos/precos_prox). \n2 = adicionar um outro veiculo \n3 = mostrar as placas ordenadas. \n4 = ver lista atual de todos os veiculos.\n5 = SAIR \n ";
     cin >> condition;
     string md;
     string mar;
@@ -227,17 +217,33 @@ int main(int argc, char**argv){
     string door;
     string plaq;
     float price;
+
+        int expression;
+        string exemplim;
     switch (condition)
     {
-    case 0:
-        imprime1(bd,tam,r);
-        break;
     case 1:
-        exclui(bd,&tam,placa1);
-        imprime(bd,tam);
-        break;
+        cout << "qual a placa do carro?";
+        cin >> exemplim;
+        busca(bd,tam,exemplim);
+        cout << "\n1 - exibir infos \n2 - excluir \n3 - mostrar dez preços proximos";
+        cin >> expression;
+        switch (expression)
+        {
+        case 1:
+            imprime1(bd,tam,r);
+            break;
+        case 2:
+            exclui(bd,&tam,exemplim);
+            break;
+        case 3:
+            dezprox(vetprecos,tam,vetprecos[r],10);
+            break;
+        default:cout << "?";
+            break;
+        }
+    break;
     case 2:
-        //if(tam<50){
         cout << "INSIRA: modelo:";cin >> md;
         cout << "INSIRA: marca:";cin >> mar;
         cout << "INSIRA: versao (ex:hat sedan SUV....):";cin >> ver;
@@ -252,21 +258,16 @@ int main(int argc, char**argv){
         cout << "INSIRA: placa:";cin >> plaq;
         cout << "INSIRA: preço:";cin >> price;
         insere(bd,&tam,md,mar,ver,year,kms,pot,con,moa,dir,color,door,plaq,price);
-       // }
         break;
     case 3:
         ordplacas(bd,tam,vetplacas);
         for (int i = 0; i < tam; i++){
-        cout << vetplacas[i] <<"\n";
-    }
+        cout << vetplacas[i] <<"\n";}
         break;
     case 4:
-        dezprox(vetprecos,tam,vetprecos[r],10);
-        break;
-    case 5:
         imprime(bd,tam);
         break;
-    case 6:
+    case 5:
     printf("flw");
         salva(bd,tam);
         c=5;
@@ -274,13 +275,8 @@ int main(int argc, char**argv){
     default:
         printf("?");
         break;
-    }
-    }
-    
+    }}
     cout << "LISTA FINAL DE VEICULOS\n-----------------------------\n";
     imprime(bd,tam);
-    }
-    else
-         cout << "unable to open the file";
-
-}
+    }else
+        cout << "unable to open the file";}
