@@ -223,10 +223,10 @@ int main(int argc, char**argv){
     switch (condition)
     {
     case 1:
-        cout << "qual a placa do carro?";
+        cout << "\nqual a placa do carro?\n";
         cin >> exemplim;
         busca(bd,tam,exemplim);
-        cout << "\n1 - exibir infos \n2 - excluir \n3 - mostrar dez preços proximos";
+        cout << "\n1 - exibir infos \n2 - excluir \n3 - mostrar dez preços proximos\n";
         cin >> expression;
         switch (expression)
         {
@@ -256,7 +256,7 @@ int main(int argc, char**argv){
         cout << "INSIRA: cor:";cin >> color;
         cout << "INSIRA: n de portas:";cin >> door;
         cout << "INSIRA: placa:";cin >> plaq;
-        cout << "INSIRA: preço:";cin >> price;
+        cout << "INSIRA: preço (EM FLOAT) ex: 1234.00 :";cin >> price;
         insere(bd,&tam,md,mar,ver,year,kms,pot,con,moa,dir,color,door,plaq,price);
         break;
     case 3:
