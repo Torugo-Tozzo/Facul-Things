@@ -125,23 +125,7 @@ int ordplacas(Veiculo *bd[],int tam,string vetplacas[]){
     sort(&vetplacas[0],&vetplacas[tam]);
     return 0;
 }
-/*
-int dezprox(float vetprecos[],int tam,float preco,float vex[]){
-    //  [0 1 2 3  4 (5) 6 7 8 9 10] - 11 elementos-10 precos pra comparar
-    int k;
-    for(int j = 0; j < tam; j++ ){
-        if (vetprecos[j] == preco){
-            k = j;
-            cout << "Encontrado na posição = " << j << ".\n";
-            j = tam; 
-        }}
-    vex[5] = vetprecos[k]; 
-    for (int i = 5; i > 0; i--){
-        if (k-i > 0){  
-            vex[(10/2)-i]= vetprecos[k-i];
-        }else{}  
-    }   
-}*/
+
 void dezprox(float vetprecos[], int tam, float x,int k){
     for (int i = 0; i < tam; i++){
        vetprecos[i] = bd[i]->preco;  
@@ -156,7 +140,10 @@ void dezprox(float vetprecos[], int tam, float x,int k){
 		pq.pop();
 		pq.push({ diff, i });}
 	while (pq.empty() == false) {
-		cout << vetprecos[pq.top().second] << " ";
+        for(int j = 0; j < tam; j++ ){
+        if (bd[j]->preco == vetprecos[pq.top().second]){
+            imprime1(bd,tam,j);
+            j = tam;}}
 		pq.pop();}
 }
 
@@ -231,6 +218,7 @@ int main(int argc, char**argv){
         imprime(bd,tam);
         break;
     case 2:
+        //if(tam<50){
         cout << "INSIRA: modelo:";cin >> md;
         cout << "INSIRA: marca:";cin >> mar;
         cout << "INSIRA: versao (ex:hat sedan SUV....):";cin >> ver;
@@ -245,6 +233,7 @@ int main(int argc, char**argv){
         cout << "INSIRA: placa:";cin >> plaq;
         cout << "INSIRA: preço:";cin >> price;
         insere(bd,&tam,md,mar,ver,year,kms,pot,con,moa,dir,color,door,plaq,price);
+       // }
         break;
     case 3:
         ordplacas(bd,tam,vetplacas);
