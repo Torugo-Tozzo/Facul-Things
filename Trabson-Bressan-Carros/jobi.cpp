@@ -147,22 +147,22 @@ void dezprox(float vetprecos[], int tam, float x,int k){
 		pq.pop();}
 }
 void salva(Veiculo *bd[], int tam){
-    ofstream myfile2("BD_veiculos_2.txt");
-        if(myfile2.is_open()){
+    ofstream myfile("BD_veiculos_2.txt");
+        if(myfile.is_open()){
         for(int j = 0; j < tam; j++ ){
-            myfile2 << bd[j]->modelo << " ";
-            myfile2 << bd[j]->marca << " ";
-            myfile2 << bd[j]->versao << " ";
-            myfile2 << bd[j]->ano << " ";
-            myfile2 << bd[j]->kilometragem << " "; 
-            myfile2 << bd[j]->motor << " "; 
-            myfile2 << bd[j]->consumo << " "; 
-            myfile2 << bd[j]->moua << " "; 
-            myfile2 << bd[j]->direcao << " "; 
-            myfile2 << bd[j]->cor << " "; 
-            myfile2 << bd[j]->portas << " ";
-            myfile2 << bd[j]->placa << " ";  
-            myfile2 << bd[j]->preco << endl; 
+            myfile << bd[j]->modelo << " ";
+            myfile << bd[j]->marca << " ";
+            myfile << bd[j]->versao << " ";
+            myfile << bd[j]->ano << " ";
+            myfile << bd[j]->kilometragem << " "; 
+            myfile << bd[j]->motor << " "; 
+            myfile << bd[j]->consumo << " "; 
+            myfile << bd[j]->moua << " "; 
+            myfile << bd[j]->direcao << " "; 
+            myfile << bd[j]->cor << " "; 
+            myfile << bd[j]->portas << " ";
+            myfile << bd[j]->placa << " ";  
+            myfile << bd[j]->preco << endl; 
         }}
 }
 
