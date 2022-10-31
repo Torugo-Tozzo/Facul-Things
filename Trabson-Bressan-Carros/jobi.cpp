@@ -92,7 +92,10 @@ int exclui(Veiculo *bd[],int *tam,string ex){
 }
 
 int insere(Veiculo *bd[], int *tam,string model,string marc,string ver,string an,string mot,string kilo,string con,string mou,string dire,string tinta,string port,string plac,float prec){  
-        if (bd[*tam] == NULL){
+        if(*tam > 49){
+        cout << "\nOps.......\nParece que n vai dar não, ta lotado!\n\n";
+        } 
+        if (bd[*tam] == NULL && *tam < 50){
             bd[*tam] = new Veiculo; 
             bd[*tam]->modelo = model;
             bd[*tam]->marca = marc;
@@ -195,8 +198,6 @@ int main(int argc, char**argv){
     for(int i = tam; i < 50;i++){
         bd[i] = NULL;
     }
-   
-    string placa1;
 
     int c;
 
@@ -278,5 +279,6 @@ int main(int argc, char**argv){
     }}
     cout << "LISTA FINAL DE VEICULOS\n-----------------------------\n";
     imprime(bd,tam);
+    
     }else
         cout << "unable to open the file";}
