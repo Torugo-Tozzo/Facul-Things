@@ -70,7 +70,7 @@ int busca(Veiculo *bd[],int tam,string exemplo){
         //oq vai ser buscado (placa)
         if (bd[j]->placa == exemplo){
             r = j;
-            cout << "\nEncontrado na posição = " << j << ".\n";
+            cout << "\nEncontrado na posição = " << j+1 << ".\n";
             j = tam;
         }if(j == tam-1 && r == -2){ 
         r = -1;
@@ -145,6 +145,25 @@ void dezprox(float vetprecos[], int tam, float x,int k){
             imprime1(bd,tam,j);
             j = tam;}}
 		pq.pop();}
+}
+void salva(Veiculo *bd[], int tam){
+    ofstream myfile2("BD_veiculos_2.txt");
+        if(myfile2.is_open()){
+        for(int j = 0; j < tam; j++ ){
+            myfile2 << bd[j]->modelo << " ";
+            myfile2 << bd[j]->marca << " ";
+            myfile2 << bd[j]->versao << " ";
+            myfile2 << bd[j]->ano << " ";
+            myfile2 << bd[j]->kilometragem << " "; 
+            myfile2 << bd[j]->motor << " "; 
+            myfile2 << bd[j]->consumo << " "; 
+            myfile2 << bd[j]->moua << " "; 
+            myfile2 << bd[j]->direcao << " "; 
+            myfile2 << bd[j]->cor << " "; 
+            myfile2 << bd[j]->portas << " ";
+            myfile2 << bd[j]->placa << " ";  
+            myfile2 << bd[j]->preco << endl; 
+        }}
 }
 
 int main(int argc, char**argv){
@@ -248,7 +267,8 @@ int main(int argc, char**argv){
         imprime(bd,tam);
         break;
     case 6:
-        printf("flw");
+    printf("flw");
+        salva(bd,tam);
         c=5;
         break;
     default:
