@@ -16,7 +16,7 @@
 
 typedef struct no_ {
 	int valor;  //'carga útil' do nó
-                    //num cenario real, poderia ser: nome, endereco...
+        int chave; //num cenario real, poderia ser: nome, endereco...
 	struct no_ * prox;  // ponteiro para o próximo nó da lista encadeada
 } no;
 
