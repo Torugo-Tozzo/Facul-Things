@@ -58,11 +58,10 @@ no * busca(tLista * ptlista, int valor) {
 			ptlista->lista->prox = ptlista->lista;
 		}
 		else {if(valor == ptlista->lista->valor){
-			cout << ptlista->lista->chave;
-		}}
-		
+			cout << ptlista->lista->chave;}
+            ptlista->lista->prox = NULL;
+        }
 	}
-	
 }
 
 /**
@@ -70,6 +69,7 @@ no * busca(tLista * ptlista, int valor) {
  * @param valor a ser inserido.
  */
 void insere_inicio(tLista * ptlista, int valor){
+
 }
 
 /**
@@ -77,6 +77,13 @@ void insere_inicio(tLista * ptlista, int valor){
  * @param valor a ser inserido.
  */
 void insere_fim(tLista * ptlista, int valor){
+    busca(ptlista,valor);
+    if (ptlista->lista->prox == NULL){
+        tLista* ptr = new (tLista);
+        ptr->tam++;
+        ptr->lista->valor = valor;    
+    }
+    
 }
 
 /**
@@ -98,4 +105,3 @@ no * remove_fim(tLista * ptlista){
  */
 void imprime(tLista * ptlista){
 }
-
