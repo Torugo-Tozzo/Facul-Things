@@ -52,6 +52,17 @@ tLista * encerra_lista(tLista * ptlista) {
  * @return verdareiro se o elemento foi encontrado.
  */
 no * busca(tLista * ptlista, int valor) {
+	while(ptlista->lista != NULL){
+		if(ptlista->lista->valor != valor){
+			ptlista->lista = ptlista->lista->prox;
+			ptlista->lista->prox = ptlista->lista;
+		}
+		else {if(valor == ptlista->lista->valor){
+			cout << ptlista->lista->chave;
+		}}
+		
+	}
+	
 }
 
 /**
