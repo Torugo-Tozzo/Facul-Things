@@ -30,10 +30,13 @@ int main() {
     cout<<"insere 1: ";
     imprime(&pilha1);
 
-    // insere_inicio(lista1, 10);
-    // cout<<"insere 2: ";
-    // imprime(lista1);
+    push(&pilha1, 10);
+    cout<<"insere 2: ";
+    imprime(&pilha1);
 
+    pop(&pilha1, 10);
+    cout<<"remove 2";
+    imprime(&pilha1);
     // insere_fim(lista1, 15);
     // cout<<"insere 3: ";
     // imprime(lista1);
