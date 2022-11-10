@@ -55,9 +55,9 @@ cout << "\n----------------------------------------\n";
 int main(int argc, char**argv){
     string line;
     ifstream myfile("BD_veiculos_2.txt");
-    Cabecalho cabeca;
-    cabeca.inicio = NULL;
-    cabeca.tam = 0;
+    Cabecalho *cabeca;
+    cabeca->inicio = NULL;
+    cabeca->tam = 0;
     if(myfile.is_open()){
         while (!myfile.eof()){  
             bd = new Veiculo;      
@@ -89,12 +89,12 @@ int main(int argc, char**argv){
             //cout << bd->preco<< " \n";
             //bd->prox = new Veiculo;
             bd = bd->prox;
-            cabeca.tam++;
+            cabeca->tam++;
         }
         myfile.close();
    
     cout << "\nLISTA FINAL DE VEICULOS\n------------------------------------------------------------------------------------------------------\n";
     //imprime(&cabeca);
-    cout << cabeca.tam;
+    cout << cabeca->tam;
     }else
         cout << "unable to open the file";}
