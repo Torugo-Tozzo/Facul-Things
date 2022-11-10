@@ -21,71 +21,80 @@ struct Veiculo{
     string portas;
     string placa;
     float preco;
-    Veiculo *prox;
+    struct Veiculo *prox;
+};
+
+struct Cabecalho{
+    int tam;
+    struct Veiculo *inicio;    
 };
 
 Veiculo *bd;
 
-void imprime(Veiculo *bd,int tam){
-        while (bd->prox != NULL){
-            cout << bd->modelo << " ";
-            cout << bd->marca << " ";
-            cout << bd->versao << " ";
-            cout << bd->ano << " ";
-            cout << bd->kilometragem << " "; 
-            cout << bd->motor << " "; 
-            cout << bd->consumo << " "; 
-            cout << bd->moua << " "; 
-            cout << bd->direcao << " "; 
-            cout << bd->cor << " "; 
-            cout << bd->portas << " ";
-            cout << bd->placa << " ";  
-            cout << bd->preco << endl;
+void imprime(Cabecalho *bd){
+        Veiculo *percorredor;
+        while (percorredor->prox != NULL){
+            cout << percorredor->modelo << " ";
+            cout << percorredor->marca << " ";
+            cout << percorredor->versao << " ";
+            cout << percorredor->ano << " ";
+            cout << percorredor->kilometragem << " "; 
+            cout << percorredor->motor << " "; 
+            cout << percorredor->consumo << " "; 
+            cout << percorredor->moua << " "; 
+            cout << percorredor->direcao << " "; 
+            cout << percorredor->cor << " "; 
+            cout << percorredor->portas << " ";
+            cout << percorredor->placa << " ";  
+            cout << percorredor->preco << endl;
+            percorredor = percorredor->prox;
             } 
-
+cout << "\n----------------------------------------\n";
 }
 
 int main(int argc, char**argv){
     string line;
     ifstream myfile("BD_veiculos_2.txt");
-    int tam = 0;
+    Cabecalho cabeca;
+    cabeca.inicio = NULL;
+    cabeca.tam = 0;
     if(myfile.is_open()){
-        while (!myfile.eof()){   
-            bd = new Veiculo;       
+        while (!myfile.eof()){  
+            bd = new Veiculo;      
             myfile >> bd->modelo;
             cout << bd->modelo<< " ";
             myfile >> bd->marca;
-            cout << bd->marca<< " ";
+            //cout << bd->marca<< " ";
             myfile >> bd->versao;
-            cout << bd->versao<< " ";
+            //cout << bd->versao<< " ";
             myfile >> bd->ano;
-            cout << bd->ano<< " ";
+            //cout << bd->ano<< " ";
             myfile >> bd->kilometragem; 
-            cout << bd->kilometragem<< " ";
+            //cout << bd->kilometragem<< " ";
             myfile >> bd->motor; 
-            cout << bd->modelo<< " ";
+            //cout << bd->modelo<< " ";
             myfile >> bd->consumo; 
-            cout << bd->consumo<< " ";
+            //cout << bd->consumo<< " ";
             myfile >> bd->moua; 
-            cout << bd->moua<< " ";
+            //cout << bd->moua<< " ";
             myfile >> bd->direcao; 
-            cout << bd->direcao<< " ";
+            //cout << bd->direcao<< " ";
             myfile >> bd->cor;
-            cout << bd->cor<< " ";
+            //cout << bd->cor<< " ";
             myfile >> bd->portas;
-            cout << bd->portas<< " ";
+            //cout << bd->portas<< " ";
             myfile >> bd->placa; 
-            cout << bd->placa<< " ";
+            //cout << bd->placa<< " ";
             myfile >> bd->preco;
-            cout << bd->preco<< " \n";
-            bd->prox = new Veiculo;
-
-        tam++;
+            //cout << bd->preco<< " \n";
+            //bd->prox = new Veiculo;
+            bd = bd->prox;
+            cabeca.tam++;
         }
         myfile.close();
    
     cout << "\nLISTA FINAL DE VEICULOS\n------------------------------------------------------------------------------------------------------\n";
-    //imprime(bd,tam);
-    
+    //imprime(&cabeca);
+    cout << cabeca.tam;
     }else
         cout << "unable to open the file";}
