@@ -10,6 +10,8 @@
 
 %start comando
 
+%left MAIS MENOS VEZES
+
 %%
 comando : expr ENTER { printf("resultado = %d\n" , $1);};
 
