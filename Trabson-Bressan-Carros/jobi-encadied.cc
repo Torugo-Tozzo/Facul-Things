@@ -1,3 +1,9 @@
+/*
+        !!!!!!AVISO IMPORTANTE!!!!!!
+        Nesta implementação de lista encadiada o primeiro slot
+        (o primeiro nó da lista) ficará sempre vazio, contendo valores nulos
+        ou seja a lista começa a partir do segundo nó
+*/
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -29,11 +35,10 @@ struct Cabecalho{
     struct Veiculo *inicio;    
 };
 
-Veiculo *bd;
-
-void imprime(Cabecalho *bd){
+void imprime(Cabecalho *exemplo){
         Veiculo *percorredor;
-        while (percorredor->prox != NULL){
+        percorredor = exemplo->inicio->prox;
+        while (percorredor != NULL){
             cout << percorredor->modelo << " ";
             cout << percorredor->marca << " ";
             cout << percorredor->versao << " ";
@@ -49,52 +54,40 @@ void imprime(Cabecalho *bd){
             cout << percorredor->preco << endl;
             percorredor = percorredor->prox;
             } 
-cout << "\n----------------------------------------\n";
+cout << "-------------------------------------------------------------------------------\n";
 }
 
 int main(int argc, char**argv){
     string line;
     ifstream myfile("BD_veiculos_2.txt");
-    Cabecalho *cabeca;
-    cabeca->inicio = NULL;
-    cabeca->tam = 0;
+    Cabecalho *cabeca = new Cabecalho;
+    Veiculo *bd;
+    cabeca->inicio = new Veiculo;
+    bd = cabeca->inicio;
     if(myfile.is_open()){
-        while (!myfile.eof()){  
-            bd = new Veiculo;      
-            myfile >> bd->modelo;
-            cout << bd->modelo<< " ";
-            myfile >> bd->marca;
-            //cout << bd->marca<< " ";
-            myfile >> bd->versao;
-            //cout << bd->versao<< " ";
-            myfile >> bd->ano;
-            //cout << bd->ano<< " ";
-            myfile >> bd->kilometragem; 
-            //cout << bd->kilometragem<< " ";
-            myfile >> bd->motor; 
-            //cout << bd->modelo<< " ";
-            myfile >> bd->consumo; 
-            //cout << bd->consumo<< " ";
-            myfile >> bd->moua; 
-            //cout << bd->moua<< " ";
-            myfile >> bd->direcao; 
-            //cout << bd->direcao<< " ";
-            myfile >> bd->cor;
-            //cout << bd->cor<< " ";
-            myfile >> bd->portas;
-            //cout << bd->portas<< " ";
-            myfile >> bd->placa; 
-            //cout << bd->placa<< " ";
-            myfile >> bd->preco;
-            //cout << bd->preco<< " \n";
-            //bd->prox = new Veiculo;
+        while (!myfile.eof()){
+            bd->prox = new Veiculo;
             bd = bd->prox;
+
+            myfile >> bd->modelo;
+            myfile >> bd->marca;
+            myfile >> bd->versao;
+            myfile >> bd->ano;
+            myfile >> bd->kilometragem; 
+            myfile >> bd->motor; 
+            myfile >> bd->consumo; 
+            myfile >> bd->moua; 
+            myfile >> bd->direcao; 
+            myfile >> bd->cor;
+            myfile >> bd->portas;
+            myfile >> bd->placa; 
+            myfile >> bd->preco;
+            
             cabeca->tam++;
         }
         myfile.close();
    
-    cout << "\nLISTA FINAL DE VEICULOS\n------------------------------------------------------------------------------------------------------\n";
-    //imprime(&cabeca);
-    cout << cabeca->tam;
+    imprime(cabeca);
+    cout << "Tamanho da lista = " << cabeca->tam << endl;
     }else
         cout << "unable to open the file";}
