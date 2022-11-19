@@ -1,7 +1,7 @@
 /*
         !!!!!!AVISO IMPORTANTE!!!!!!
-        Nesta implementação de lista encadiada o primeiro slot
-        (o primeiro nó da lista) ficará sempre vazio, contendo valores nulos
+        Nesta implementação de lista encadiada, 
+        o primeiro slot (o primeiro nó da lista), ficará sempre vazio, contendo valores nulos
         ou seja a lista começa a partir do segundo nó
 */
 #include <iostream>
