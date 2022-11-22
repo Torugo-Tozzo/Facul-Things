@@ -35,10 +35,12 @@ struct Cabecalho{
     struct Veiculo *inicio;    
 };
 
+int resultado;
+
 void imprime(Cabecalho *exemplo){
         Veiculo *percorredor;
-        percorredor = exemplo->inicio->prox;
-        while (percorredor != NULL){
+        percorredor = exemplo->inicio;
+        while (percorredor->prox != NULL){
             cout << percorredor->modelo << " ";
             cout << percorredor->marca << " ";
             cout << percorredor->versao << " ";
@@ -67,10 +69,21 @@ void busca(Cabecalho *cabeca, string placaexemplo){
         pos++;
         }else if(percorredor->placa == placaexemplo){
             cout << "Carro encontrado na posição " << pos <<  endl;
+            resultado = pos;
             pos = cabeca->tam+1;
             }else cout << "Tem essa placa aqui não, fiotão.";
     }
-    
+}
+
+void exclui(Cabecalho *cabeca,string placaexemplo){
+    Veiculo *percorredor;
+    percorredor = cabeca->inicio;
+    while(percorredor->prox->placa != placaexemplo){
+        percorredor = percorredor->prox;
+    }
+    percorredor->prox = percorredor->prox->prox;
+    free(percorredor->prox);
+    cabeca->tam--;
 }
 
 int main(int argc, char**argv){
@@ -102,11 +115,16 @@ int main(int argc, char**argv){
             cabeca->tam++;
         }
         myfile.close();
-   
-    imprime(cabeca);
 
     cout << "Tamanho da lista = " << cabeca->tam << endl;
+    imprime(cabeca);
 
     busca(cabeca,"MAN7774");
+
+    exclui(cabeca,"MAN7774");
+
+    cout << "Tamanho da lista = " << cabeca->tam << endl;
+    imprime(cabeca);
+
     }else
         cout << "unable to open the file";}
