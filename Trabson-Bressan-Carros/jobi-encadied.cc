@@ -57,6 +57,22 @@ void imprime(Cabecalho *exemplo){
 cout << "-------------------------------------------------------------------------------\n";
 }
 
+void busca(Cabecalho *cabeca, string placaexemplo){
+    Veiculo *percorredor;
+    percorredor = cabeca->inicio->prox;
+    int pos = 1;
+    while (pos <= cabeca->tam){
+        if(percorredor->placa != placaexemplo){
+        percorredor = percorredor->prox;
+        pos++;
+        }else if(percorredor->placa == placaexemplo){
+            cout << "Carro encontrado na posição " << pos <<  endl;
+            pos = cabeca->tam+1;
+            }else cout << "Tem essa placa aqui não, fiotão.";
+    }
+    
+}
+
 int main(int argc, char**argv){
     string line;
     ifstream myfile("BD_veiculos_2.txt");
@@ -88,6 +104,9 @@ int main(int argc, char**argv){
         myfile.close();
    
     imprime(cabeca);
+
     cout << "Tamanho da lista = " << cabeca->tam << endl;
+
+    busca(cabeca,"MAN7774");
     }else
         cout << "unable to open the file";}
