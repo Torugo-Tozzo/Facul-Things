@@ -40,7 +40,7 @@ int resultado;
 void imprime(Cabecalho *exemplo){
         Veiculo *percorredor;
         percorredor = exemplo->inicio;
-        while (percorredor->prox != NULL){
+        while (percorredor != NULL){
             cout << percorredor->modelo << " ";
             cout << percorredor->marca << " ";
             cout << percorredor->versao << " ";
@@ -77,13 +77,36 @@ void busca(Cabecalho *cabeca, string placaexemplo){
 
 void exclui(Cabecalho *cabeca,string placaexemplo){
     Veiculo *percorredor;
+    Veiculo *ant;
     percorredor = cabeca->inicio;
-    while(percorredor->prox->placa != placaexemplo){
+    while(percorredor->placa != placaexemplo){
+        ant =percorredor;
         percorredor = percorredor->prox;
     }
-    percorredor->prox = percorredor->prox->prox;
-    free(percorredor->prox);
+    ant->prox = percorredor->prox;
+    free(percorredor);   
     cabeca->tam--;
+}
+
+void insere_inicio(Cabecalho *cabeca , string modelo,string marca,string versao,string ano,string kilometragem,string motor,string consumo,string moua,string direcao,string cor,string portas,string placa,float preco){
+    Veiculo *novo = new Veiculo;
+    novo->modelo = modelo;
+    novo->marca = marca;
+    novo->versao = versao;
+    novo->ano = ano;
+    novo->kilometragem = kilometragem;
+    novo->motor = motor;
+    novo->consumo = consumo;
+    novo->moua = moua;
+    novo->direcao = direcao;
+    novo->cor = cor;
+    novo->portas = portas;
+    novo->placa = placa;
+    novo->preco = preco;
+    novo->prox = cabeca->inicio->prox;
+    cabeca->inicio->prox = novo;
+    cabeca->tam++;
+    cout<<"veiculo inserido no inicio da lista "  << endl;
 }
 
 int main(int argc, char**argv){
@@ -122,8 +145,16 @@ int main(int argc, char**argv){
     busca(cabeca,"MAN7774");
 
     exclui(cabeca,"MAN7774");
+    
 
     cout << "Tamanho da lista = " << cabeca->tam << endl;
+    imprime(cabeca);
+    
+    //exclui(cabeca,"PAE2146");
+    //imprime(cabeca);
+    
+    insere_inicio(cabeca,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE",0.00);
+    
     imprime(cabeca);
 
     }else
