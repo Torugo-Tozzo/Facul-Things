@@ -162,26 +162,87 @@ int main(int argc, char**argv){
             cabeca->tam++;
         }
         myfile.close();
-
-    cout << "Tamanho da lista = " << cabeca->tam << endl;
-    imprime(cabeca);
-
-    busca(cabeca,"MAN7774");
-
-    exclui(cabeca,"MAN7774");
     
+    Veiculo *placas;
 
-    cout << "Tamanho da lista = " << cabeca->tam << endl;
-    imprime(cabeca);
-    
-    //exclui(cabeca,"PAE2146");
-    //imprime(cabeca);
-    
-    insere_inicio(cabeca,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE",0.00);
-    
-    imprime(cabeca);
+    // cout << "Tamanho da lista = " << cabeca->tam << endl;
+    // imprime(cabeca);
+    // busca(cabeca,"MAN7774");
+    // exclui(cabeca,"MAN7774");
+    // cout << "Tamanho da lista = " << cabeca->tam << endl;
+    // imprime(cabeca);
+    // insere_inicio(cabeca,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE",0.00);
+    // imprime(cabeca);
+    // insere_fim(cabeca,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE",0.00);
+    // imprime(cabeca);
 
-    insere_fim(cabeca,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE",0.00);
-    imprime(cabeca);
+    int resp, caso, caso1, caso3;
+    string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa;
+    float preco;
+
+    do{
+        cout << " Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para alguma coisa\n Digite : (5) para sair\n";
+        cin >> caso;
+        switch (caso){
+        case 1:
+            cout << "Digite a placa a ser buscada\n";
+            cin >> placa;
+            busca(cabeca,placa);
+            cout << "Deseja excluir?\n Sim ! exclui essa lata velha - digite(1).\n Não, nuca, não exlua, pf! - digite(2)\n";
+            cin >> caso1;
+            if(caso1 == 1){
+                exclui(cabeca,placa);
+            }
+            break;
+        case 2:
+            cout << "Digite modelo\n";
+                     cin >> modelo;
+            cout << "Digite marca\n";
+                     cin >> marca;
+            cout << "Digite versao\n";
+                     cin >> versao;
+            cout << "Digite ano\n";
+                     cin >> ano;
+            cout << "Digite kilometragem\n";
+                     cin >> kilometragem;
+            cout << "Digite motor\n";
+                     cin >> motor;
+            cout << "Digite consumo\n";
+                     cin >> consumo;
+            cout << "Digite moua\n";
+                     cin >> moua;
+            cout << "Digite direcao\n";
+                     cin >> direcao;
+            cout << "Digite cor\n";
+                     cin >> cor;
+            cout << "Digite portas\n";
+                     cin >> portas;
+            cout << "Digite placa\n";
+                     cin >> placa;
+            cout << "Digite preco (em float, ex: 12345.00)\n";
+                     cin >> preco;
+
+            cout << "adicionando......\n";
+            insere_fim(cabeca,modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa,preco);
+        break;
+        case 3:
+            cout << "Mostrar os veiculos = digite (1)\nOrdenar os veiculos pelas placas = digite (2)\n";
+            cin >> caso3;
+            if(caso3 == 1){imprime(cabeca);}else cout << "precisa fazer ainda";
+        break;
+
+        case 4:
+        break;
+
+        case 5:
+            resp = 1;
+        break;
+        default:
+            break;
+        }
+        cout << "Deseja continuar no programa\n Continuar = digite (0)\n Sair = digite (1)\n";
+        cin >> resp;
+    } while (resp==0);
+    
     }else
         cout << "unable to open the file";}
