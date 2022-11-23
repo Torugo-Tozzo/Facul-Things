@@ -109,6 +109,30 @@ void insere_inicio(Cabecalho *cabeca , string modelo,string marca,string versao,
     cout<<"veiculo inserido no inicio da lista "  << endl;
 }
 
+void insere_fim(Cabecalho *cabeca , string modelo,string marca,string versao,string ano,string kilometragem,string motor,string consumo,string moua,string direcao,string cor,string portas,string placa,float preco){
+    Veiculo *novo = new Veiculo;
+    novo->modelo = modelo;
+    novo->marca = marca;
+    novo->versao = versao;
+    novo->ano = ano;
+    novo->kilometragem = kilometragem;
+    novo->motor = motor;
+    novo->consumo = consumo;
+    novo->moua = moua;
+    novo->direcao = direcao;
+    novo->cor = cor;
+    novo->portas = portas;
+    novo->placa = placa;
+    novo->preco = preco;
+    Veiculo *percorredor;
+    percorredor = cabeca->inicio;
+    while(percorredor->prox != NULL){percorredor = percorredor->prox;}
+    percorredor->prox = novo;
+    novo->prox = NULL;
+    cabeca->tam++;
+    cout<<"veiculo inserido no fim da lista "  << endl;
+}
+
 int main(int argc, char**argv){
     string line;
     ifstream myfile("BD_veiculos_2.txt");
@@ -157,5 +181,7 @@ int main(int argc, char**argv){
     
     imprime(cabeca);
 
+    insere_fim(cabeca,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE",0.00);
+    imprime(cabeca);
     }else
         cout << "unable to open the file";}
