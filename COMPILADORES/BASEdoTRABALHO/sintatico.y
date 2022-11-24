@@ -136,11 +136,7 @@ termo
     ;
 %%
 
-void yyerror(char *s){
-printf( ”%s \n” , s ) ;
-}
-
-int main(void) {
+int main() {
 yyparse() ;
-return 0 ;
+puts ("prog ok");
 }

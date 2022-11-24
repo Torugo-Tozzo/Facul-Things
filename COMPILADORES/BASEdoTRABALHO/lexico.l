@@ -2,7 +2,7 @@
 #include "sintatico.h"
 char atomo[100];
 int nlin = 1;
-void yyerror (char *);
+int yyerror (char *s);
 %}
 
 identificador [_a-zA-Z]([a-zA-Z0-9])*
@@ -57,10 +57,15 @@ logico          return T_LOGICO;
 {numero}            {strcpy(atomo, yytext); return T_NUMERO;}
 {espaco}            ;
 {novalinha}         nlin++;
-.                   yyerror;
+.                   yyerror("erro lexico");
 %%
 
-int yywrap(void){
-    return;
+int yyerror (char * s){
+    printf("ERRO ");
+    exit(10);
+}
+
+int yywrap(){
+    return 1;
 }
 
