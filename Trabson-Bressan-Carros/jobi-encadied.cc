@@ -58,6 +58,14 @@ void imprime(Cabecalho *exemplo){
             } 
 cout << "-------------------------------------------------------------------------------\n";
 }
+void imprime_placa(Cabecalho *placas){
+    Veiculo *percorredor;
+        percorredor = placas->inicio;
+        while (percorredor != NULL){
+            cout << percorredor->placa << " - " << percorredor->modelo << "\n";
+            percorredor = percorredor->prox;
+        }
+}
 
 void busca(Cabecalho *cabeca, string placaexemplo){
     Veiculo *percorredor;
@@ -133,10 +141,50 @@ void insere_fim(Cabecalho *cabeca , string modelo,string marca,string versao,str
     cout<<"veiculo inserido no fim da lista "  << endl;
 }
 
+/*
+      Procedimento para inserir ordenado
+*/
+void inserir_ordenado(Cabecalho *placas, string placa, string modelo){
+    Veiculo *aux, *novo = new Veiculo;
+
+    if(novo){
+        novo->placa = placa;
+        novo->modelo = modelo;
+        if(placas->inicio == NULL){ // a lista está vazia?
+            novo->prox = NULL;
+            placas->inicio = novo;
+        }
+        else if(novo->placa < placas->inicio->placa){ // é o menor?
+            novo->prox = placas->inicio;
+            placas->inicio = novo;
+        }
+        else{ // inserção no meio ou no final da lista
+            aux = placas->inicio;
+            while(aux->prox && novo->placa > aux->prox->placa)
+                aux = aux->prox;
+            novo->prox = aux->prox;
+            aux->prox = novo;
+        }
+    }
+    else
+        printf("Erro ao alocar memoria!\n");
+}
+
+void ordena_placa(Cabecalho *cabeca, Cabecalho *placas){
+    Veiculo *percorredor;
+    percorredor = cabeca->inicio->prox;
+    while (percorredor != NULL){
+        inserir_ordenado(placas,percorredor->placa,percorredor->modelo);
+        percorredor = percorredor->prox;
+    }
+    
+}
+
 int main(int argc, char**argv){
     string line;
     ifstream myfile("BD_veiculos_2.txt");
     Cabecalho *cabeca = new Cabecalho;
+    Cabecalho *placas = new Cabecalho;
     Veiculo *bd;
     cabeca->inicio = new Veiculo;
     bd = cabeca->inicio;
@@ -162,8 +210,6 @@ int main(int argc, char**argv){
             cabeca->tam++;
         }
         myfile.close();
-    
-    Veiculo *placas;
 
     // cout << "Tamanho da lista = " << cabeca->tam << endl;
     // imprime(cabeca);
@@ -228,7 +274,7 @@ int main(int argc, char**argv){
         case 3:
             cout << "Mostrar os veiculos = digite (1)\nOrdenar os veiculos pelas placas = digite (2)\n";
             cin >> caso3;
-            if(caso3 == 1){imprime(cabeca);}else cout << "precisa fazer ainda";
+            if(caso3 == 1){imprime(cabeca);}else ordena_placa(cabeca,placas);imprime_placa(placas);
         break;
 
         case 4:
