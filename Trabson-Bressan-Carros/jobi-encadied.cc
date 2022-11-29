@@ -194,20 +194,50 @@ void cria_pilha(Cabecalho *cabeca, Cabecalho *pilha){
     Veiculo *novo, *aux = pilha->inicio;
     Veiculo *percorredor = cabeca->inicio->prox;
     int tam = 1;
-
+    cout << "Filtrar carros com direção:\nHidraulica: digite - (1)\nEletrica: digite - (2)\n";
+    int decisao;
+    cin >> decisao;
+    string tipo;
+    if (decisao == 1){
+        tipo = "Hidráulica";
+    }else{tipo = "Elétrica";}
     while (percorredor != NULL){
-        if(percorredor->direcao == "Hidráulica"){
+        if(percorredor->direcao == tipo){
             novo = new Veiculo;
             novo = percorredor;
             aux = novo;
-            cout << aux->modelo << " - " << aux->direcao << " - linha - " << tam << endl; 
+            cout << aux->modelo << " - " << aux->direcao << " - posição - " << tam << endl; 
             aux = aux->prox;
-            
         }
         tam++;
         percorredor = percorredor->prox;
     }
-    cout << "Pilha de carros com direção Hidraulica construida!\n";
+    cout << "\nPilha de carros com direção "<< tipo <<" construida!\n" << endl;
+}
+
+void cria_fila(Cabecalho *cabeca, Cabecalho *fila){
+    Veiculo *novo, *aux = fila->inicio;
+    Veiculo *percorredor = cabeca->inicio->prox;
+    int tam = 1;
+    cout << "Filtrar carros com cambio:\nAutomatico: digite - (1)\nManual: digite - (2)\n";
+    int decisao;
+    cin >> decisao;
+    string tipo;
+    if (decisao == 1){
+        tipo = "Automático";
+    }else{tipo = "Manual";}
+    while (percorredor != NULL){
+        if(percorredor->moua == tipo){
+            novo = new Veiculo;
+            novo = percorredor;
+            aux = novo;
+            cout << aux->modelo << " - " << aux->moua << " - posição - " << tam << endl; 
+            aux = aux->prox;
+        }
+        tam++;
+        percorredor = percorredor->prox;
+    }
+    cout << "\nFila de carros com cambio "<< tipo <<" construida!\n" << endl;
 }
 
 int main(int argc, char**argv){
@@ -249,10 +279,8 @@ int main(int argc, char**argv){
     string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa;
     float preco;
 
-    cria_pilha(cabeca,pilha);
-
     do{
-        cout << " Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para alguma coisa\n Digite : (5) para sair\n";
+        cout << " Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para empilhar carros de acordo com a direção\n Digite : (5) para criar fila de carros de acordo com o cambio\n Digite : (6) para sair\n";
         cin >> caso;
         switch (caso){
         case 1:
@@ -305,11 +333,13 @@ int main(int argc, char**argv){
                 ordena_placa(cabeca,placas);
                 imprime_placa(placas);
         break;
-
         case 4:
+        cria_pilha(cabeca,pilha);
         break;
-
         case 5:
+        cria_fila(cabeca,fila);
+        break;
+        case 6:
             resp = 1;
         break;
         default:
