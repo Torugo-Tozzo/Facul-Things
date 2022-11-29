@@ -58,6 +58,7 @@ void imprime(Cabecalho *exemplo){
             } 
 cout << "-------------------------------------------------------------------------------\n";
 }
+
 void imprime_placa(Cabecalho *placas){
     Veiculo *percorredor;
         percorredor = placas->inicio;
@@ -141,24 +142,22 @@ void insere_fim(Cabecalho *cabeca , string modelo,string marca,string versao,str
     cout<<"veiculo inserido no fim da lista "  << endl;
 }
 
-/*
-      Procedimento para inserir ordenado
-*/
+
 void inserir_ordenado(Cabecalho *placas, string placa, string modelo){
     Veiculo *aux, *novo = new Veiculo;
 
     if(novo){
         novo->placa = placa;
         novo->modelo = modelo;
-        if(placas->inicio == NULL){ // a lista está vazia?
+        if(placas->inicio == NULL){ 
             novo->prox = NULL;
             placas->inicio = novo;
         }
-        else if(novo->placa < placas->inicio->placa){ // é o menor?
+        else if(novo->placa < placas->inicio->placa){ 
             novo->prox = placas->inicio;
             placas->inicio = novo;
         }
-        else{ // inserção no meio ou no final da lista
+        else{
             aux = placas->inicio;
             while(aux->prox && novo->placa > aux->prox->placa)
                 aux = aux->prox;
@@ -177,14 +176,49 @@ void ordena_placa(Cabecalho *cabeca, Cabecalho *placas){
         inserir_ordenado(placas,percorredor->placa,percorredor->modelo);
         percorredor = percorredor->prox;
     }
-    
+}
+
+void encerra_lista(Cabecalho *cabeca) {
+	Veiculo *ant = cabeca->inicio;
+	Veiculo *pont = cabeca->inicio;
+	while(ant != NULL){
+		pont = ant->prox;
+		delete(ant);
+		ant = pont;
+	}
+	delete(cabeca);
+        cout << "-As listas/pilhas/filas foram desalocadas."<<endl;
+}
+
+void cria_pilha(Cabecalho *cabeca, Cabecalho *pilha){
+    Veiculo *novo, *aux = pilha->inicio;
+    Veiculo *percorredor = cabeca->inicio->prox;
+    int tam = 1;
+
+    while (percorredor != NULL){
+        if(percorredor->direcao == "Hidráulica"){
+            novo = new Veiculo;
+            novo = percorredor;
+            aux = novo;
+            cout << aux->modelo << " - " << aux->direcao << " - linha - " << tam << endl; 
+            aux = aux->prox;
+            
+        }
+        tam++;
+        percorredor = percorredor->prox;
+    }
+    cout << "Pilha de carros com direção Hidraulica construida!\n";
 }
 
 int main(int argc, char**argv){
     string line;
     ifstream myfile("BD_veiculos_2.txt");
+
     Cabecalho *cabeca = new Cabecalho;
     Cabecalho *placas = new Cabecalho;
+    Cabecalho *pilha  = new Cabecalho;
+    Cabecalho *fila   = new Cabecalho;
+
     Veiculo *bd;
     cabeca->inicio = new Veiculo;
     bd = cabeca->inicio;
@@ -211,20 +245,11 @@ int main(int argc, char**argv){
         }
         myfile.close();
 
-    // cout << "Tamanho da lista = " << cabeca->tam << endl;
-    // imprime(cabeca);
-    // busca(cabeca,"MAN7774");
-    // exclui(cabeca,"MAN7774");
-    // cout << "Tamanho da lista = " << cabeca->tam << endl;
-    // imprime(cabeca);
-    // insere_inicio(cabeca,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE",0.00);
-    // imprime(cabeca);
-    // insere_fim(cabeca,"TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE","TESTE",0.00);
-    // imprime(cabeca);
-
     int resp, caso, caso1, caso3;
     string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa;
     float preco;
+
+    cria_pilha(cabeca,pilha);
 
     do{
         cout << " Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para alguma coisa\n Digite : (5) para sair\n";
@@ -274,7 +299,11 @@ int main(int argc, char**argv){
         case 3:
             cout << "Mostrar os veiculos = digite (1)\nOrdenar os veiculos pelas placas = digite (2)\n";
             cin >> caso3;
-            if(caso3 == 1){imprime(cabeca);}else ordena_placa(cabeca,placas);imprime_placa(placas);
+            if(caso3 == 1){
+                imprime(cabeca);
+                }else 
+                ordena_placa(cabeca,placas);
+                imprime_placa(placas);
         break;
 
         case 4:
@@ -286,9 +315,9 @@ int main(int argc, char**argv){
         default:
             break;
         }
-        cout << "Deseja continuar no programa\n Continuar = digite (0)\n Sair = digite (1)\n";
+        cout << "Deseja continuar no programa?\n Continuar = digite (0)\n Sair = digite (1)\n";
         cin >> resp;
     } while (resp==0);
-    
+    encerra_lista(cabeca); encerra_lista(placas); 
     }else
         cout << "unable to open the file";}
