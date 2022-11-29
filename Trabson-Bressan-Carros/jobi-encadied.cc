@@ -348,6 +348,6 @@ int main(int argc, char**argv){
         cout << "Deseja continuar no programa?\n Continuar = digite (0)\n Sair = digite (1)\n";
         cin >> resp;
     } while (resp==0);
-    encerra_lista(cabeca); encerra_lista(placas); 
+    encerra_lista(cabeca); encerra_lista(placas);encerra_lista(pilha); encerra_lista(fila);
     }else
         cout << "unable to open the file";}
