@@ -1,4 +1,8 @@
-/*
+/*	
+	Victor Hugo Tozzo Filho	- 2020.1.08.018
+	Pedro - 2022.1.0
+	Fortuna - 2022.1.0
+	
         !!!!!!AVISO IMPORTANTE!!!!!!
         Nesta implementação de lista encadiada, 
         o primeiro slot (o primeiro nó da lista), ficará sempre vazio, contendo valores nulos
