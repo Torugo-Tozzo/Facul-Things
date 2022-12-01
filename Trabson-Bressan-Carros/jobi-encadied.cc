@@ -1,7 +1,7 @@
 /*	
 	Victor Hugo Tozzo Filho	- 2020.1.08.018
-	Pedro - 2022.1.08.0
-	Fortuna - 2022.1.08.0
+	Pedro Henrique Alves Barbosa - 2022.1.08.043
+	Pedro Henrique Alves Barbosa - 2022.1.08.043	
 	
         !!!!!!AVISO IMPORTANTE!!!!!!
         Nesta implementação de lista encadiada, 
