@@ -1,7 +1,7 @@
 /*	
 	Victor Hugo Tozzo Filho	- 2020.1.08.018
 	Pedro Henrique Alves Barbosa - 2022.1.08.043
-	Pedro Henrique Alves Barbosa - 2022.1.08.043	
+	Rafael Silva Fortuna- 2022.1.08.026	
 	
         !!!!!!AVISO IMPORTANTE!!!!!!
         Nesta implementação de lista encadiada, 
