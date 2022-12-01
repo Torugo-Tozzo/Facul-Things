@@ -193,30 +193,79 @@ void encerra_lista(Cabecalho *cabeca) {
 	delete(cabeca);
         cout << "-As listas/pilhas/filas foram desalocadas."<<endl;
 }
-
-void cria_pilha(Cabecalho *cabeca, Cabecalho *pilha){
-    Veiculo *novo, *aux = pilha->inicio;
-    Veiculo *percorredor = cabeca->inicio->prox;
-    int tam = 1;
-    cout << "Filtrar carros com direção:\nHidraulica: digite - (1)\nEletrica: digite - (2)\n";
-    int decisao;
-    cin >> decisao;
-    string tipo;
-    if (decisao == 1){
-        tipo = "Hidráulica";
-    }else{tipo = "Elétrica";}
-    while (percorredor != NULL){
-        if(percorredor->direcao == tipo){
-            novo = new Veiculo;
-            novo = percorredor;
-            aux = novo;
-            cout << aux->modelo << " - " << aux->direcao << " - posição - " << tam << endl; 
-            aux = aux->prox;
+void insere_fim(Cabecalho *pilha, string direcao, string modelo){
+      Veiculo *percorredor, *novo = new Veiculo;//(Veiculo*)malloc(sizeof(Veiculo));
+      novo->direcao = direcao;
+      novo->modelo = modelo;
+      novo->prox = NULL;
+      if (pilha->tam == 0){
+        novo->direcao = direcao;
+        novo->modelo = modelo;
+        pilha->inicio = novo;
+        pilha->tam++;
+      }else{
+        percorredor = pilha->inicio; 
+        while (percorredor->prox != NULL){
+        percorredor = percorredor->prox;
         }
-        tam++;
+        novo->direcao = direcao;
+        percorredor->prox = novo;
+        pilha->tam++;
+        }
+        cout<<"Carro Inserido" <<  endl;
+            
+}
+void remove_fim(Cabecalho *pilha){
+    Veiculo *percorredor, *ant, *antant;
+    percorredor = pilha->inicio;
+    ant = percorredor;
+    while (percorredor->prox != NULL){
+        ant = percorredor;
         percorredor = percorredor->prox;
     }
-    cout << "\nPilha de carros com direção "<< tipo <<" construida!\n" << endl;
+        if(pilha->tam > 0){
+            ant->prox = NULL;
+            free(percorredor);
+            pilha->tam--;
+            cout << "Ultimo elemento da lista removido!\n";
+        }else
+        {
+            cout << "pilha vazia\n";
+        }
+        
+}
+
+void remove_inicio(Cabecalho *fila){
+    Veiculo *percorredor, *ant, *antant;
+    percorredor = fila->inicio;
+    ant = percorredor;
+        if(fila->tam > 0){
+            ant->prox = NULL;
+            free(percorredor);
+            fila->tam--;
+            cout << "Ultimo elemento da lista removido!\n";
+        }else
+        {
+            cout << "pilha vazia\n";
+        }
+        
+}
+
+void cria_pilha(Cabecalho *cabeca, Cabecalho *pilha){
+  Veiculo *percorredor, *per2;
+  percorredor = cabeca->inicio->prox;
+  while (percorredor != NULL){
+    if (percorredor->direcao == "Hidráulica"){
+        insere_fim(pilha,percorredor->direcao, percorredor->modelo);
+    }else{ 
+        remove_fim(pilha);}
+    percorredor = percorredor->prox;
+  }
+  per2 = pilha->inicio;
+  while (per2 != NULL){
+    cout << per2->direcao<< " - "<< per2->modelo << endl;
+    per2 = per2->prox;
+  }
 }
 
 void cria_fila(Cabecalho *cabeca, Cabecalho *fila){
@@ -251,7 +300,9 @@ int main(int argc, char**argv){
     Cabecalho *cabeca = new Cabecalho;
     Cabecalho *placas = new Cabecalho;
     Cabecalho *pilha  = new Cabecalho;
+    pilha->tam = 0;
     Cabecalho *fila   = new Cabecalho;
+    fila->tam = 0;
 
     Veiculo *bd;
     cabeca->inicio = new Veiculo;
@@ -282,6 +333,8 @@ int main(int argc, char**argv){
     int resp, caso, caso1, caso3;
     string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa;
     float preco;
+
+    cria_pilha(cabeca, pilha);
 
     do{
         cout << " Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para empilhar carros de acordo com a direção\n Digite : (5) para criar fila de carros de acordo com o cambio\n Digite : (6) para sair\n";
@@ -349,9 +402,7 @@ int main(int argc, char**argv){
         default:
             break;
         }
-        cout << "Deseja continuar no programa?\n Continuar = digite (0)\n Sair = digite (1)\n";
-        cin >> resp;
-    } while (resp==0);
+    } while (resp != 1);
     encerra_lista(cabeca); encerra_lista(placas);encerra_lista(pilha); encerra_lista(fila);
     }else
         cout << "unable to open the file";}
