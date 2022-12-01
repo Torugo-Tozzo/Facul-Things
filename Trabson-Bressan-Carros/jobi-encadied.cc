@@ -1,7 +1,7 @@
 /*	
 	Victor Hugo Tozzo Filho	- 2020.1.08.018
-	Pedro - 2022.1.0
-	Fortuna - 2022.1.0
+	Pedro - 2022.1.08.0
+	Fortuna - 2022.1.08.0
 	
         !!!!!!AVISO IMPORTANTE!!!!!!
         Nesta implementação de lista encadiada, 
@@ -193,10 +193,11 @@ void encerra_lista(Cabecalho *cabeca) {
 	delete(cabeca);
         cout << "-As listas/pilhas/filas foram desalocadas."<<endl;
 }
-void insere_fim(Cabecalho *pilha, string direcao, string modelo){
-      Veiculo *percorredor, *novo = new Veiculo;//(Veiculo*)malloc(sizeof(Veiculo));
+void insere_fim(Cabecalho *pilha, string direcao, string modelo, string moua){
+      Veiculo *percorredor, *novo = new Veiculo;
       novo->direcao = direcao;
       novo->modelo = modelo;
+      novo->moua = moua;
       novo->prox = NULL;
       if (pilha->tam == 0){
         novo->direcao = direcao;
@@ -212,7 +213,7 @@ void insere_fim(Cabecalho *pilha, string direcao, string modelo){
         percorredor->prox = novo;
         pilha->tam++;
         }
-        cout<<"Carro Inserido" <<  endl;
+        //cout<<"Carro Inserido" <<  endl;
             
 }
 void remove_fim(Cabecalho *pilha){
@@ -227,26 +228,10 @@ void remove_fim(Cabecalho *pilha){
             ant->prox = NULL;
             free(percorredor);
             pilha->tam--;
-            cout << "Ultimo elemento da lista removido!\n";
+            //cout << "Ultimo elemento da lista removido!\n";
         }else
         {
-            cout << "pilha vazia\n";
-        }
-        
-}
-
-void remove_inicio(Cabecalho *fila){
-    Veiculo *percorredor, *ant, *antant;
-    percorredor = fila->inicio;
-    ant = percorredor;
-        if(fila->tam > 0){
-            ant->prox = NULL;
-            free(percorredor);
-            fila->tam--;
-            cout << "Ultimo elemento da lista removido!\n";
-        }else
-        {
-            cout << "pilha vazia\n";
+           // cout << "lista vazia\n";
         }
         
 }
@@ -256,41 +241,50 @@ void cria_pilha(Cabecalho *cabeca, Cabecalho *pilha){
   percorredor = cabeca->inicio->prox;
   while (percorredor != NULL){
     if (percorredor->direcao == "Hidráulica"){
-        insere_fim(pilha,percorredor->direcao, percorredor->modelo);
+        insere_fim(pilha,percorredor->direcao, percorredor->modelo, percorredor->moua);
     }else{ 
         remove_fim(pilha);}
     percorredor = percorredor->prox;
   }
   per2 = pilha->inicio;
   while (per2 != NULL){
-    cout << per2->direcao<< " - "<< per2->modelo << endl;
+    cout << per2->direcao<< " - "<< per2->modelo <<" - "<< per2->moua << endl;
     per2 = per2->prox;
   }
 }
 
-void cria_fila(Cabecalho *cabeca, Cabecalho *fila){
-    Veiculo *novo, *aux = fila->inicio;
-    Veiculo *percorredor = cabeca->inicio->prox;
-    int tam = 1;
-    cout << "Filtrar carros com cambio:\nAutomatico: digite - (1)\nManual: digite - (2)\n";
-    int decisao;
-    cin >> decisao;
-    string tipo;
-    if (decisao == 1){
-        tipo = "Automático";
-    }else{tipo = "Manual";}
-    while (percorredor != NULL){
-        if(percorredor->moua == tipo){
-            novo = new Veiculo;
-            novo = percorredor;
-            aux = novo;
-            cout << aux->modelo << " - " << aux->moua << " - posição - " << tam << endl; 
-            aux = aux->prox;
+void remove_inicio(Cabecalho *fila){
+    Veiculo *primeiro;
+        if(fila->tam > 0){
+            primeiro = fila->inicio;
+            fila->inicio = fila->inicio->prox; 
+            free(primeiro);
+            fila->tam--;
+            //cout << "Primeiro elemento da lista removido!\n";
+        }else
+        {
+            //cout << "pilha vazia\n";
         }
-        tam++;
+        
+}
+void cria_fila(Cabecalho *cabeca, Cabecalho *fila){
+    Veiculo *novo, *perc, *aux = fila->inicio;
+    Veiculo *percorredor = cabeca->inicio->prox;
+    int tam = 0;
+    while (percorredor != NULL){
+        if(percorredor->moua == "Automático"){
+            insere_fim(fila,percorredor->direcao,percorredor->modelo,percorredor->moua);
+        }else{
+            remove_inicio(fila);
+        }
         percorredor = percorredor->prox;
     }
-    cout << "\nFila de carros com cambio "<< tipo <<" construida!\n" << endl;
+    perc = fila->inicio;
+    while (perc != NULL){
+        cout << perc->direcao<< " - "<< perc->modelo <<" - "<< perc->moua << endl;
+        perc = perc->prox;
+    }
+    cout << "\nFila de carros construida!\n" << endl;
 }
 
 int main(int argc, char**argv){
@@ -334,10 +328,8 @@ int main(int argc, char**argv){
     string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa;
     float preco;
 
-    cria_pilha(cabeca, pilha);
-
     do{
-        cout << " Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para empilhar carros de acordo com a direção\n Digite : (5) para criar fila de carros de acordo com o cambio\n Digite : (6) para sair\n";
+        cout << " Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para empilhar carros (hidraulico add, eletrico rm)\n Digite : (5) para enfileirar carros (automatico add, manual rm)\n Digite : (6) para sair\n";
         cin >> caso;
         switch (caso){
         case 1:
