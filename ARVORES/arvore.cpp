@@ -18,14 +18,14 @@ struct Arvore   // Estrutura que vai representar a arvore e vai ter a raíz
 
 void insere(Arvore *arv, int valor)
 {
-  Node *novo = new Node;
-  novo->esq = NULL;    /* a esquerda da arv é NULL */
-  novo->dir = NULL;    /* a direita da arv é NULL */
-  novo->valor = valor; /* Armazena a informação */
+  Node *novo = new Node;  //Nó que vai ser inserido
+  novo->esq = NULL;    // a esquerda da arv é NULL 
+  novo->dir = NULL;    // a direita da arv é NULL 
+  novo->valor = valor; // Armazena a informação 
 
   if (arv->raiz == NULL)    
-  {                           //Caso a arvore esteja sem Raiz
-    arv->raiz = novo;
+  {                           
+    arv->raiz = novo;     //Caso a arvore esteja sem Raiz
   }
   else
   { // se nao for a raiz
@@ -34,24 +34,31 @@ void insere(Arvore *arv, int valor)
     while (true)
     {
       anterior = atual;
-      if (valor <= atual->valor)
+      if (valor < atual->valor)
       { // ir para esquerda
         atual = atual->esq;
         if (atual == NULL)    // caso nulo, sera exatamente aqui que devemos inserir
         {
           anterior->esq = novo;   //insere e encerra a funcao
+          cout << "valor "<< novo->valor <<" inserido na arvore!" << endl;
           return;
         }
       } // fim da condição ir a esquerda
-      else
+      else if(valor > atual->valor)
       { // ir para direita
         atual = atual->dir;
         if (atual == NULL)  // caso nulo, sera exatamente aqui que devemos inserir
         {
           anterior->dir = novo;
+          cout << "valor "<< novo->valor <<" inserido na arvore!" << endl;
           return;
         }
-      } // fim da condição ir a direita
+      }else   //caso o valor ja conste na arvore ele não vai inseri-lo novamente
+      {
+        cout << "valor " << valor << " ja existente na arvore, tente outro!" << endl;
+        return;
+      }
+       // fim da condição ir a direita
     }   // fim do laço while
   }     // fim do else não raiz
 }
@@ -86,9 +93,10 @@ int main()
   insere(arv, 44);
   insere(arv, 2);
   insere(arv, 15);
+  insere(arv, 15);
 
   busca(arv,2);
 
   cout << arv->raiz->valor << endl;
-  cout << arv->raiz->esq->valor << endl;
+  cout << arv->raiz->esq->dir->valor << endl;
 }
