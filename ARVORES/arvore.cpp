@@ -4,14 +4,14 @@
 
 using namespace std;
 
-struct Node
+struct Node   // Nós que vão preencher a arvore
 {
   int valor;
   Node *esq;
   Node *dir;
 };
 
-struct Arvore
+struct Arvore   // Estrutura que vai representar a arvore e vai ter a raíz
 {
   Node *raiz;
 };
@@ -23,30 +23,30 @@ void insere(Arvore *arv, int valor)
   novo->dir = NULL;    /* a direita da arv é NULL */
   novo->valor = valor; /* Armazena a informação */
 
-  if (arv->raiz == NULL)
-  {
+  if (arv->raiz == NULL)    
+  {                           //Caso a arvore esteja sem Raiz
     arv->raiz = novo;
   }
   else
   { // se nao for a raiz
     Node *atual = arv->raiz;
-    Node *anterior;
+    Node *anterior;           // anterior sera importante para a atribuição do novo nó
     while (true)
     {
       anterior = atual;
       if (valor <= atual->valor)
       { // ir para esquerda
         atual = atual->esq;
-        if (atual == NULL)
+        if (atual == NULL)    // caso nulo, sera exatamente aqui que devemos inserir
         {
-          anterior->esq = novo;
+          anterior->esq = novo;   //insere e encerra a funcao
           return;
         }
       } // fim da condição ir a esquerda
       else
       { // ir para direita
         atual = atual->dir;
-        if (atual == NULL)
+        if (atual == NULL)  // caso nulo, sera exatamente aqui que devemos inserir
         {
           anterior->dir = novo;
           return;
@@ -58,22 +58,22 @@ void insere(Arvore *arv, int valor)
 
 void busca(Arvore *arv, int valor){
   Node *atual = arv->raiz;
-  while (atual != NULL)
+  while (atual != NULL)       //enquanto não encontrar Nó Nulo ele percorre a arvore
   {
-    if (valor > atual->valor)
+    if (valor > atual->valor)   //se maior vai pra direita
     {
       atual = atual->dir;
-    }else if (valor < atual->valor)
+    }else if (valor < atual->valor)   // se menor vai pra esquerda
     {
-      atual = atual->esq;
-    }else if (valor == atual->valor)
+      atual = atual->esq;             
+    }else if (valor == atual->valor)  // se for igual, encontrou
     {
       cout << "valor encontrado" << endl;
-      return;
+      return; // termina aqui a funcao se achar
     }
   }
   cout << "valor não encontrado" << endl;
-  return;
+  return; // caso não encontre 
 }
 
 int main()
