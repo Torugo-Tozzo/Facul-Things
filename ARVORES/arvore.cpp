@@ -56,19 +56,38 @@ void insere(Arvore *arv, int valor)
   }     // fim do else não raiz
 }
 
-//busca
-//excluir 
-//em ordem 
-//pos ordem
-//pre prdem
+void busca(Arvore *arv, int valor){
+  Node *atual = arv->raiz;
+  while (atual != NULL)
+  {
+    if (valor > atual->valor)
+    {
+      atual = atual->dir;
+    }else if (valor < atual->valor)
+    {
+      atual = atual->esq;
+    }else if (valor == atual->valor)
+    {
+      cout << "valor encontrado" << endl;
+      return;
+    }
+  }
+  cout << "valor não encontrado" << endl;
+  return;
+}
 
 int main()
 {
 
-  Arvore *arv = new Arvore; // Nó raiz que inicia a arvore
+  Arvore *arv = new Arvore; // inicia a arvore
 
-  insere(arv, 55);
+  insere(arv, 20);
   insere(arv, 9);
+  insere(arv, 44);
+  insere(arv, 2);
+  insere(arv, 15);
+
+  busca(arv,2);
 
   cout << arv->raiz->valor << endl;
   cout << arv->raiz->esq->valor << endl;
