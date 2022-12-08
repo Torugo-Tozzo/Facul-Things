@@ -1,56 +1,69 @@
-#include <cstdlib>
 #include <iostream>
-#include <string.h>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
-struct Node{
-	int valor;  //'carga útil' do nó
-    Node *dir;
-    Node *esq;
+struct Node
+{
+  int valor;
+  Node *esq;
+  Node *dir;
 };
 
-struct Cabecalho{
-	int altura;            
-	Node *raiz;  
+struct Arvore
+{
+  Node *raiz;
 };
 
-void inicia_arvore(Cabecalho *arvore1) {
-	arvore1->raiz = NULL;
-    cout << "-A arvore foi iniciada."<<endl;
-}
+void insere(Arvore *arv, int valor)
+{
+  Node *novo = new Node;
+  novo->esq = NULL;    /* a esquerda da arv é NULL */
+  novo->dir = NULL;    /* a direita da arv é NULL */
+  novo->valor = valor; /* Armazena a informação */
 
-void insere(Cabecalho *arvore, int valor){
-    Node *percorredor, *novo = new Node;
-    percorredor = arvore->raiz;
-    if (arvore->raiz == NULL ){
-            novo->valor = valor;
-            arvore->raiz = novo;
-            cout << "valor inserido na raiz" << endl;
-    }else{
-        while (percorredor != NULL){
-            if (valor < percorredor->valor){
-                    percorredor = percorredor->esq;
-            }else if(valor > percorredor->valor){
-                    percorredor = percorredor->dir;
-            }else if(valor == percorredor->valor){
-                    cout << "valor ja existente na arvore" << endl;
-                    goto Jaexiste;
-            }
+  if (arv->raiz == NULL)
+  {
+    arv->raiz = novo;
+  }
+  else
+  { // se nao for a raiz
+    Node *atual = arv->raiz;
+    Node *anterior;
+    while (true)
+    {
+      anterior = atual;
+      if (valor <= atual->valor)
+      { // ir para esquerda
+        atual = atual->esq;
+        if (atual == NULL)
+        {
+          anterior->esq = novo;
+          return;
         }
-        novo->valor = valor;
-        percorredor = novo;
-        cout << "valor inserido na arvore" << endl;
-    }
-    Jaexiste:
-    cout << "." << endl;
+      } // fim da condição ir a esquerda
+      else
+      { // ir para direita
+        atual = atual->dir;
+        if (atual == NULL)
+        {
+          anterior->dir = novo;
+          return;
+        }
+      } // fim da condição ir a direita
+    }   // fim do laço while
+  }     // fim do else não raiz
 }
 
-int main() {
+int main()
+{
 
-Cabecalho *arvore = new Cabecalho;
-insere(arvore, 5);  
-insere(arvore, 4);
-insere(arvore, 6);
-insere(arvore, 5);
+  Arvore *arv = new Arvore; // Nó raiz que inicia a arvore
+
+  insere(arv, 55);
+  insere(arv, 9);
+
+  cout << arv->raiz->valor << endl;
+  cout << arv->raiz->esq->valor << endl;
 }
