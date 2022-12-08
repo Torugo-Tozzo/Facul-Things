@@ -56,6 +56,12 @@ void insere(Arvore *arv, int valor)
   }     // fim do else não raiz
 }
 
+//busca
+//excluir 
+//em ordem 
+//pos ordem
+//pre prdem
+
 int main()
 {
 
