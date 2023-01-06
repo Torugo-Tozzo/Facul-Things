@@ -140,6 +140,18 @@ void postorder(Node *root) {
   std::cout << root->value << " ";
 }
 
+void printTree(Node* node, int level) {
+  if (node == nullptr) return;
+
+  // Imprime o valor do nó atual
+  for (int i = 0; i < level; i++) std::cout << "        ";
+  std::cout << node->value << std::endl;
+
+  // Imprime os nós filhos
+  printTree(node->left, level + 1);
+  printTree(node->right, level + 1);
+}
+
 int main() {
 
   Node *root = nullptr;
@@ -156,6 +168,9 @@ int main() {
   postorder(root);
   std::cout << "\n---------" << std::endl;
   preorder(root);
+  std::cout << "\n---------" << std::endl;
+  
+  printTree(root, 0);
 
   /*
     // antes do balancemento AVL
