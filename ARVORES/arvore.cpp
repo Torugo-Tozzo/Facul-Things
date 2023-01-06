@@ -1,102 +1,184 @@
+#include <algorithm>
 #include <iostream>
-#include <fstream>
+#include <queue>
 #include <string>
 
-using namespace std;
-
-struct Node   // Nós que vão preencher a arvore
-{
-  int valor;
-  Node *esq;
-  Node *dir;
+// Nós da arvore
+struct Node {
+  int value;
+  int height; // altura nó
+  Node *left;
+  Node *right;
 };
 
-struct Arvore   // Estrutura que vai representar a arvore e vai ter a raíz
-{
-  Node *raiz;
-};
-
-void insere(Arvore *arv, int valor)
-{
-  Node *novo = new Node;  //Nó que vai ser inserido
-  novo->esq = NULL;    // a esquerda da arv é NULL 
-  novo->dir = NULL;    // a direita da arv é NULL 
-  novo->valor = valor; // Armazena a informação 
-
-  if (arv->raiz == NULL)    
-  {                           
-    arv->raiz = novo;     //Caso a arvore esteja sem Raiz
+/*
+//Inserção sem balanceamento
+void insert(Node*& root, int value) {
+  if (root == nullptr) {
+    root = new Node{value, nullptr, nullptr};
+  } else if (value < root->value) {
+    insert(root->left, value);
+  } else {
+    insert(root->right, value);
   }
+}
+*/
+
+int height(Node *node) {
+  if (node == nullptr)
+    return 0;
+  return node->height;
+}
+
+int getBalance(Node *node) {
+  if (node == nullptr)
+    return 0;
+  return height(node->left) - height(node->right);
+}
+
+Node *rightRotate(Node *y) {
+  Node *x = y->left;
+  Node *T2 = x->right;
+
+  // Rotação
+  x->right = y;
+  y->left = T2;
+
+  // Atualização das alturas
+  y->height = std::max(height(y->left), height(y->right)) + 1;
+  x->height = std::max(height(x->left), height(x->right)) + 1;
+
+  // Retorna o novo raiz
+  return x;
+}
+
+Node *leftRotate(Node *x) {
+  Node *y = x->right;
+  Node *T2 = y->left;
+
+  // Rotação
+  y->left = x;
+  x->right = T2;
+
+  // Atualização das alturas
+  x->height = std::max(height(x->left), height(x->right)) + 1;
+  y->height = std::max(height(y->left), height(y->right)) + 1;
+
+  // Retorna o novo raiz
+  return y;
+}
+
+Node *insert(Node *node, int value) {
+  // Inserção normal de um nó em uma árvore binária de busca
+  if (node == nullptr) {
+    node = new Node;
+    node->value = value;
+    node->left = nullptr;
+    node->right = nullptr;
+  } else if (value < node->value)
+    node->left = insert(node->left, value);
+  else if (value > node->value)
+    node->right = insert(node->right, value);
   else
-  { // se nao for a raiz
-    Node *atual = arv->raiz;
-    Node *anterior;           // anterior sera importante para a atribuição do novo nó
-    while (true)
-    {
-      anterior = atual;
-      if (valor < atual->valor)
-      { // ir para esquerda
-        atual = atual->esq;
-        if (atual == NULL)    // caso nulo, sera exatamente aqui que devemos inserir
-        {
-          anterior->esq = novo;   //insere e encerra a funcao
-          cout << "valor "<< novo->valor <<" inserido na arvore!" << endl;
-          return;
-        }
-      } // fim da condição ir a esquerda
-      else if(valor > atual->valor)
-      { // ir para direita
-        atual = atual->dir;
-        if (atual == NULL)  // caso nulo, sera exatamente aqui que devemos inserir
-        {
-          anterior->dir = novo;
-          cout << "valor "<< novo->valor <<" inserido na arvore!" << endl;
-          return;
-        }
-      }else   //caso o valor ja conste na arvore ele não vai inseri-lo novamente
-      {
-        cout << "valor " << valor << " ja existente na arvore, tente outro!" << endl;
-        return;
-      }
-       // fim da condição ir a direita
-    }   // fim do laço while
-  }     // fim do else não raiz
-}
+    return node;
 
-void busca(Arvore *arv, int valor){
-  Node *atual = arv->raiz;
-  while (atual != NULL)       //enquanto não encontrar Nó Nulo ele percorre a arvore
-  {
-    if (valor > atual->valor)   //se maior vai pra direita
-    {
-      atual = atual->dir;
-    }else if (valor < atual->valor)   // se menor vai pra esquerda
-    {
-      atual = atual->esq;             
-    }else if (valor == atual->valor)  // se for igual, encontrou
-    {
-      cout << "valor encontrado" << endl;
-      return; // termina aqui a funcao se achar
-    }
+  // Atualização da altura do nó atual
+  node->height = 1 + std::max(height(node->left), height(node->right));
+
+  // Calcula o fator de balanceamento deste nó ancestral para verificar se a
+  // árvore está desbalanceada
+  int balance = getBalance(node);
+
+  // Se a árvore estiver desbalanceada, precisamos realizar uma rotação
+  if (balance > 1 && value < node->left->value) {
+    // Rotação simples à direita
+    return rightRotate(node);
   }
-  cout << "valor não encontrado" << endl;
-  return; // caso não encontre 
+  if (balance < -1 && value > node->right->value) {
+    // Rotação simples à esquerda
+    return leftRotate(node);
+  }
+  if (balance > 1 && value > node->left->value) {
+    // Rotação dupla à direita
+    node->left = leftRotate(node->left);
+    return rightRotate(node);
+  }
+  if (balance < -1 && value < node->right->value) {
+    // Rotação dupla à esquerda
+    node->right = rightRotate(node->right);
+    return leftRotate(node);
+  }
+
+  // Se a árvore não estiver desbalanceada, retornamos o nó atual
+  return node;
 }
 
-int main()
-{
+// Em-ordem
+void inorder(Node *root) {
+  if (root == nullptr)
+    return;
+  inorder(root->left);
+  std::cout << root->value << " ";
+  inorder(root->right);
+}
 
-  Arvore *arv = new Arvore; // inicia a arvore
+// Pré-ordem
+void preorder(Node *root) {
+  if (root == nullptr)
+    return;
+  std::cout << root->value << " ";
+  preorder(root->left);
+  preorder(root->right);
+}
 
-  insere(arv, 20);
-  insere(arv, 9);
-  insere(arv, 44);
-  insere(arv, 2);
-  insere(arv, 15);
-  insere(arv, 15);
+// Pós-ordem
+void postorder(Node *root) {
+  if (root == nullptr)
+    return;
+  postorder(root->left);
+  postorder(root->right);
+  std::cout << root->value << " ";
+}
 
-  busca(arv,2);
+int main() {
 
-  cout << arv->raiz->valor << endl;
-  cout << arv->raiz->esq->dir->valor << endl;
+  Node *root = nullptr;
+
+  root = insert(root, 1928);
+  root = insert(root, 1700);
+  root = insert(root, 1500);
+  root = insert(root, 1444);
+  root = insert(root, 2001);
+  root = insert(root, 3000);
+
+  inorder(root);
+  std::cout << "\n---------" << std::endl;
+  postorder(root);
+  std::cout << "\n---------" << std::endl;
+  preorder(root);
+
+  /*
+    // antes do balancemento AVL
+    insert(root, 3);
+    insert(root, 5);
+    insert(root, 4);
+    insert(root, 7);
+    insert(root, 11);
+    insert(root, 1);
+
+    std::cout << root->value << std::endl;
+    std::cout << root->right->value << std::endl;
+
+    printf("\n em ordem \n");
+
+    inorder(root);
+
+    printf("\n pre ordem \n");
+
+    preorder(root);
+
+    printf("\n pos ordem \n");
+
+    postorder(root);
+  */
 }
