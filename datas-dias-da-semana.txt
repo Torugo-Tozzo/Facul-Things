@@ -11,9 +11,20 @@
 7/11
 12/12
 
-1900 - 14/3 foi uma segunda
+1600 - 14/3 foi uma terça
+1700 - 14/3 foi um domingo
+1800 - 14/3 foi uma sexta
+1900 - 14/3 foi uma quarta
+
 2000 - 14/3 foi uma terça
-2100 - 14/3 será uma quarta
+2100 - 14/3 será um domingo
+2200 - 14/3 será uma sexta
+2300 - 14/3 será uma quarta
+
+2400 - 14/3 será uma terça
+2500 - 14/3 será um domingo
+2600 - 14/3 será uma sexta
+2700 - 14/3 será uma quarta
 
 05/03/2023 - terça(2000) + 23(anos) + 5(bisextos) = dia 14/3 é uma terça portanto dia 5 é domingo
 05/03/2024 - terça + 24 + 6 =  terça(2) + 2(30-28) = 14/03/2024 
