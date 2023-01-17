@@ -39,6 +39,20 @@ PONT criarNovoNo(TIPOCHAVE ch){
     return novoNo;
 }
 
+/*Criando primeiro a mais simples arvore binaria (sem balanceamento)*/
+// void inserirBinaria(NO *no, TIPOCHAVE chave){
+//     if(!no){
+//         no = criarNovoNo(chave);
+//     } else if(chave > no->chave){
+//         no->dir = inserirBinaria(no->dir, chave);
+//     } else if (chave < no->chave){
+//         no->esq = inserirBinaria(no->esq, chave);
+//     } else {
+//         return;
+//     }
+    
+// }
+
 /* Retorna o maior valor entre dois inteiros. */
 int max(int a, int b){
     if (a>b)
@@ -533,24 +547,80 @@ bool travessia(PONT p, int *niv, TIPOCHAVE ch) {
         return false;
 }
 
+void mostraArvore(NO* node, int level) {
+  if (node == nullptr) return;
+
+  // Imprime o valor do nó atual
+  for (int i = 0; i < level; i++) std::cout << "        ";
+  std::cout << node->chave << std::endl;
+
+  // Imprime os nós filhos
+  mostraArvore(node->esq, level + 1);
+  mostraArvore(node->dir, level + 1);
+}
+
 /*
  * 
  */
 int main(int argc, char** argv) {
 
-    PONT arvore;
+    PONT arvoreAVL;
+    PONT arvoreBi;
     bool *mudou;
     int n;
 
-     inicializar(&arvore);
+    inicializar(&arvoreAVL);
+    inserirAVL(&arvoreAVL,1,mudou);
+    inserirAVL(&arvoreAVL,2,mudou);
+    inserirAVL(&arvoreAVL,3,mudou);
+    inserirAVL(&arvoreAVL,4,mudou);
+    inserirAVL(&arvoreAVL,5,mudou);
+    inserirAVL(&arvoreAVL,6,mudou);
+    inserirAVL(&arvoreAVL,7,mudou);
+    inserirAVL(&arvoreAVL,8,mudou);
+    inserirAVL(&arvoreAVL,9,mudou);
+    inserirAVL(&arvoreAVL,10,mudou);
+    inserirAVL(&arvoreAVL,11,mudou);
+    inserirAVL(&arvoreAVL,12,mudou);
+    inserirAVL(&arvoreAVL,13,mudou);
+    inserirAVL(&arvoreAVL,14,mudou);
+    inserirAVL(&arvoreAVL,15,mudou);
+
+
+    cout << "test" << endl;
+    cout << arvoreAVL->chave << endl;
+    cout << "\n-----------------------" << endl;
+
+    mostraArvore(arvoreAVL,0);
+
+    /*
+    ----------------------------------------------
+    arvore printada por niveis do 1° ao n°, ex:
+    ----------------------------------------------
+    inicializar(&arvore);
     inserirAVL(&arvore,20,mudou);
     inserirAVL(&arvore,10,mudou);
     inserirAVL(&arvore,40,mudou);
     inserirAVL(&arvore,70,mudou);
     inserirAVL(&arvore,30,mudou);
+    inserirAVL(&arvore,3,mudou);
+    inserirAVL(&arvore,13,mudou);
+    ----------------------------------------------
+    output esperado:
+    ----------------------------------------------
+    nv1     nv2     nv3
+    20
+            10
+                    3
+                    13
+            40
+                    30
+                    70
+    ----------------------------------------------
+    */
+   destruirArvore(&arvoreAVL);
 
-    cout << "test" << endl;
-    cout << arvore->chave << endl;
+  //inserirBinaria(arvoreBi,1);
 
     return 0;
 }
