@@ -39,20 +39,6 @@ PONT criarNovoNo(TIPOCHAVE ch){
     return novoNo;
 }
 
-/*Criando primeiro a mais simples arvore binaria (sem balanceamento)*/
-// void inserirBinaria(NO *no, TIPOCHAVE chave){
-//     if(!no){
-//         no = criarNovoNo(chave);
-//     } else if(chave > no->chave){
-//         no->dir = inserirBinaria(no->dir, chave);
-//     } else if (chave < no->chave){
-//         no->esq = inserirBinaria(no->esq, chave);
-//     } else {
-//         return;
-//     }
-    
-// }
-
 /* Retorna o maior valor entre dois inteiros. */
 int max(int a, int b){
     if (a>b)
@@ -565,7 +551,7 @@ void mostraArvore(NO* node, int level) {
 int main(int argc, char** argv) {
 
     PONT arvoreAVL;
-    PONT arvoreBi;
+    NO* arvoreBi;
     bool *mudou;
     int n;
 
@@ -620,8 +606,5 @@ int main(int argc, char** argv) {
     */
    destruirArvore(&arvoreAVL);
 
-  //inserirBinaria(arvoreBi,1);
-
     return 0;
 }
-
