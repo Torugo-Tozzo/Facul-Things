@@ -287,6 +287,32 @@ void cria_fila(Cabecalho *cabeca, Cabecalho *fila){
     cout << "\nFila de carros construida!\n" << endl;
 }
 
+void salva(Cabecalho *exemplo){
+    ofstream myfile("BD_veiculos_2.txt");
+        if(myfile.is_open()){
+        Veiculo *percorredor;
+        percorredor = exemplo->inicio->prox;
+        while(percorredor != NULL ){
+            myfile << percorredor->modelo << " ";
+            myfile << percorredor->marca << " ";
+            myfile << percorredor->versao << " ";
+            myfile << percorredor->ano << " ";
+            myfile << percorredor->kilometragem << " "; 
+            myfile << percorredor->motor << " "; 
+            myfile << percorredor->consumo << " "; 
+            myfile << percorredor->moua << " "; 
+            myfile << percorredor->direcao << " "; 
+            myfile << percorredor->cor << " "; 
+            myfile << percorredor->portas << " ";
+            myfile << percorredor->placa << " ";  
+            if(percorredor->prox==NULL)
+            {myfile << percorredor->preco;} 
+            else
+            myfile << percorredor->preco << endl;
+            percorredor = percorredor->prox;
+        }}
+}
+
 int main(int argc, char**argv){
     string line;
     ifstream myfile("BD_veiculos_2.txt");
@@ -389,6 +415,7 @@ int main(int argc, char**argv){
         cria_fila(cabeca,fila);
         break;
         case 6:
+            salva(cabeca);
             resp = 1;
         break;
         default:
