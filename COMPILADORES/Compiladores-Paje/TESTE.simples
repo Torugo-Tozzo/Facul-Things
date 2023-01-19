@@ -1,0 +1,11 @@
+programa testafuncao
+    inteiro x y z
+    logico a b c
+  func inteiro fazer (inteiro x REF inteiro y)
+    inteiro a b
+    logico c d
+    inteiro g
+  inicio
+  fimfunc
+inicio
+fimprograma
