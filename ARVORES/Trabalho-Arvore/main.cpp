@@ -25,41 +25,24 @@ Node* insertBI(Node* root, int data) {
 }
 
 int main(int argc, char**argv){
-    string line;
-    ifstream myfile("BD_veiculos_2.txt");
+    
 
     Cabecalho *cabeca = new Cabecalho;
     Cabecalho *placas = new Cabecalho;
     Cabecalho *pilha  = new Cabecalho;
-    pilha->tam = 0;
     Cabecalho *fila   = new Cabecalho;
+    pilha->tam = 0;
     fila->tam = 0;
 
-    Veiculo *bd;
+    
     cabeca->inicio = new Veiculo;
-    bd = cabeca->inicio;
-    if(myfile.is_open()){
-        while (!myfile.eof()){
-            bd->prox = new Veiculo;
-            bd = bd->prox;
+    
+    Cabecalho *guarda = new Cabecalho;
+    guarda->inicio = new Veiculo;
 
-            myfile >> bd->modelo;
-            myfile >> bd->marca;
-            myfile >> bd->versao;
-            myfile >> bd->ano;
-            myfile >> bd->kilometragem; 
-            myfile >> bd->motor; 
-            myfile >> bd->consumo; 
-            myfile >> bd->moua; 
-            myfile >> bd->direcao; 
-            myfile >> bd->cor;
-            myfile >> bd->portas;
-            myfile >> bd->placa; 
-            myfile >> bd->preco;
-            
-            cabeca->tam++;
-        }
-        myfile.close();
+    leArq(cabeca,"BD_veiculos_2.txt");
+    
+    string line;
 
     int resp, caso, caso1, caso3;
     string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa;
@@ -80,6 +63,11 @@ int main(int argc, char**argv){
             }
             break;
         case 2:
+            int umoudois;
+            cout << "Inserir Manualmente - (1)\n ou \nInserir Veiculo de um arquivo - (2)" << endl;
+            cin >> umoudois;
+            if (umoudois == 1)
+            { 
             cout << "Digite modelo\n";
                      cin >> modelo;
             cout << "Digite marca\n";
@@ -106,9 +94,22 @@ int main(int argc, char**argv){
                      cin >> placa;
             cout << "Digite preco (em float, ex: 12345.00)\n";
                      cin >> preco;
-
             cout << "adicionando......\n";
             insere_fim(cabeca,modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa,preco);
+                     } else
+                     {
+                        string arq_name;
+                        cout << "Digite o nome do arquivo \nExemplo: arquivo_exemplo.txt" << endl;
+                        cin >> arq_name;
+                        //função lê arquivo 
+                        leArq(guarda, "exemplo.txt");
+                        imprime(guarda);
+                        //função insere
+                        cout << "---" << endl;
+                        addLista(cabeca,guarda);
+                        imprime(cabeca);
+                     }
+                     
         break;
         case 3:
             cout << "Mostrar os veiculos = digite (1)\nOrdenar os veiculos pelas placas = digite (2)\n";
@@ -134,8 +135,7 @@ int main(int argc, char**argv){
         }
     } while (resp != 1);
     encerra_lista(cabeca); encerra_lista(placas);encerra_lista(pilha); encerra_lista(fila);
-    }else
-        cout << "unable to open the file";
+
 /*
   Node *rootAVL = nullptr;
 
@@ -185,4 +185,3 @@ int main(int argc, char**argv){
     printTree(root,0);
 */
 }
-

@@ -21,6 +21,61 @@ using namespace std;
 
 int resultado;
 
+void leArq(Cabecalho *listaAlvo, string filename){
+    Veiculo *bd = listaAlvo->inicio;
+    ifstream myfile(filename);
+    if(myfile.is_open()){
+        while (!myfile.eof()){
+            bd->prox = new Veiculo;
+            bd = bd->prox;
+            myfile >> bd->modelo;
+            myfile >> bd->marca;
+            myfile >> bd->versao;
+            myfile >> bd->ano;
+            myfile >> bd->kilometragem; 
+            myfile >> bd->motor; 
+            myfile >> bd->consumo; 
+            myfile >> bd->moua; 
+            myfile >> bd->direcao; 
+            myfile >> bd->cor;
+            myfile >> bd->portas;
+            myfile >> bd->placa; 
+            myfile >> bd->preco;
+            listaAlvo->tam++;
+        }
+        myfile.close();
+    }else
+        cout << "unable to open the file";
+
+
+}
+
+void addLista(Cabecalho *listaAlvo, Cabecalho *listaCopia){
+    Veiculo *ac = listaCopia->inicio->prox;
+    Veiculo *bd = listaAlvo->inicio->prox;
+    while (ac != NULL){
+        while (bd->prox != NULL)
+        {
+            bd = bd->prox;
+        }
+            string model = ac->modelo;
+            string marc = ac->marca;
+            string versa = ac->versao;
+            string an = ac->ano;
+            string kilometrage = ac->kilometragem; 
+            string moto = ac->motor; 
+            string consum = ac->consumo; 
+            string mou = ac->moua; 
+            string direca = ac->direcao; 
+            string co = ac->cor;
+            string porta = ac->portas;
+            string plac = ac->placa; 
+            float  prec = ac->preco;
+            insere_fim(listaAlvo,model,marc,versa,an,kilometrage,moto,consum,mou,direca,co,porta,plac,prec);
+            ac = ac->prox;
+    }
+}
+
 void imprime(Cabecalho *exemplo){
         Veiculo *percorredor;
         percorredor = exemplo->inicio;
@@ -124,6 +179,23 @@ void insere_fim(Cabecalho *cabeca , string modelo,string marca,string versao,str
     novo->prox = NULL;
     cabeca->tam++;
     cout<<"veiculo inserido no fim da lista "  << endl;
+}
+
+void insereArq(Cabecalho *guard, Cabecalho *cabec){
+    Veiculo *perc = guard->inicio;
+        while (perc != NULL)
+        {
+            Veiculo *perc2 = cabec->inicio->prox;
+                while (perc2 != NULL)
+                {
+                    perc2 = perc2->prox;
+                }
+            perc2 = new Veiculo;
+            perc2 = perc;
+            perc2->prox = NULL;
+            perc = perc->prox;
+        }
+    
 }
 
 

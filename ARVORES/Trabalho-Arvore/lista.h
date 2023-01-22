@@ -25,6 +25,7 @@ struct Cabecalho{
     struct Veiculo *inicio;    
 };
 
+void leArq(Cabecalho *listaAlvo, string filename);
 void imprime(Cabecalho *exemplo);
 void imprime_placa(Cabecalho *placas);
 void busca(Cabecalho *cabeca, string placaexemplo);
