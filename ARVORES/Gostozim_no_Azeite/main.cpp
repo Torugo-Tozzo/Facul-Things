@@ -1,13 +1,13 @@
-/*	
+/*----------------------------------------------------------------------------------------------*	
 	Victor Hugo Tozzo Filho	- 2020.1.08.018
 	Pedro Henrique Alves Barbosa - 2022.1.08.043
 	Rafael Silva Fortuna- 2022.1.08.026	
-	
+--------------------------------------------------------------------------------------------------
     !!!!!!AVISO IMPORTANTE!!!!!!
     Nesta implementação de lista encadiada, 
     o primeiro slot (o primeiro nó da lista), ficará sempre vazio, contendo valores nulos
     ou seja a lista começa a partir do segundo nó
-*/
+--------------------------------------------------------------------------------------------------*/
 # include <iostream>
 # include <string>
 # include "avl.cpp"
@@ -52,33 +52,19 @@ int main(int argc, char**argv){
     
     string line;
 
-    int resp, caso, caso1, caso3;
+    int resp, caso, caso1;
     string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa;
     float preco;
 
     Node<string>* rootAVL = nullptr;
     Node<string>* rootBI = nullptr;
+    Node<string>* rootAVLFiltro = nullptr;
+    Node<string>* rootBIFiltro = nullptr;
+
     Veiculo *percorredor;
 
-            /* Fazendo inserção de todos os nós da arvore AVL */
-            percorredor = cabeca->inicio->prox;
-            while (percorredor != NULL)
-            {
-                rootAVL = insert(rootAVL, percorredor->placa);  
-                percorredor = percorredor->prox;
-            }
-
-            /*  Fazendo inserção de todos os nós da arvore BI */
-            percorredor = cabeca->inicio->prox;
-            while (percorredor != NULL)
-            {
-                rootBI = insertBI(rootBI, percorredor->placa);  
-                percorredor = percorredor->prox;
-            }
-            
-
     do{
-        cout << "\n Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para empilhar carros (hidraulico add, eletrico rm)\n Digite : (5) para enfileirar carros (automatico add, manual rm)\n Digite : (6) para arvores\n Digite : (7) para sair\n";
+        cout << "\n Digite : (1) para buscar(excluir)\n Digite : (2) para adicionar\n Digite : (3) para relatórios da lista principal\n Digite : (4) para empilhar carros (hidraulico add, eletrico rm)\n Digite : (5) para enfileirar carros (automatico add, manual rm)\n Digite : (6) para arvores\n Digite : (7) para sair\n";
         cin >> caso;
         switch (caso){
         case 1:
@@ -140,13 +126,14 @@ int main(int argc, char**argv){
                      }
         break;
         case 3:
+            int c3;
             cout << "Mostrar os veiculos = digite (1)\nOrdenar os veiculos pelas placas = digite (2)\n";
-            cin >> caso3;
-            if(caso3 == 1){
+            cin >> c3;
+            if(c3 == 1){
                 imprime(cabeca);
-                }else 
+                }else {
                 ordena_placa(cabeca,placas);
-                imprime_placa(placas);
+                imprime_placa(placas);}
         break;
         case 4:
         cria_pilha(cabeca,pilha);
@@ -156,23 +143,73 @@ int main(int argc, char**argv){
         break;
         case 6:
             int arv1ou2;
-            cout << "Arvore AVL - Digite: (1)\nArvore BINARIA - Digite: (2)\nainda n ta pronto - Digite: (3)" << endl;
+            cout << "Arvore AVL de todos os veiculos - Digite: (1)\nArvore BINARIA de todos os veiculos - Digite: (2)\nArvore AVL de veiculos Automaticos que custam menos de 75000 - Digite: (3)\nArvore Binaria de veiculos flex com direção elétrica - Digite: (4)\n" << endl;
             cin >> arv1ou2;
             switch (arv1ou2)
             {
                 case 1:
-            printTree(rootAVL,0);
-            cout << "AVL - pre ordem:" << endl;
-            preOrder(rootAVL);
+                /* Fazendo inserção de todos os nós da arvore AVL */
+                percorredor = cabeca->inicio->prox;
+                    while (percorredor != NULL)
+                    {
+                        rootAVL = insert(rootAVL, percorredor->placa);  
+                        percorredor = percorredor->prox;
+                    }
+                printTree(rootAVL,0);
+                cout << "AVL Geral - pre ordem:" << endl;
+                preOrder(rootAVL);
                 break;
+
                 case 2:
-            printTree(rootBI,0);
-            cout << "Binaria - pre ordem:" << endl;
-            preOrder(rootBI);
+                /*  Fazendo inserção de todos os nós da arvore BI */
+                percorredor = cabeca->inicio->prox;
+                    while (percorredor != NULL)
+                    {
+                        rootBI = insertBI(rootBI, percorredor->placa);  
+                        percorredor = percorredor->prox;
+                    }
+                printTree(rootBI,0);
+                cout << "Binaria Geral - pre ordem:" << endl;
+                preOrder(rootBI);
                 break;
+
                 case 3:
-                /* code */
-                cout << "slá";
+                //fazendo as inserções com IF de filtro
+                percorredor = cabeca->inicio->prox;
+                    while (percorredor != NULL)
+                    {
+                        if (percorredor->moua == "Automático" && percorredor->preco < 75000.00) 
+                        {
+                            rootAVLFiltro = insert(rootAVLFiltro, percorredor->placa); 
+                            percorredor = percorredor->prox;
+                        } else {
+                        percorredor = percorredor->prox;
+                        }
+                    }
+                cout << "Pre-ordem:" << endl;
+                preOrder(rootAVLFiltro);
+                cout << "\n------------\n" << endl;
+                printTree(rootAVLFiltro,0);
+                break;
+
+                case 4:
+                //fazendo as inserções com IF de filtro
+                percorredor = cabeca->inicio->prox;
+                    while (percorredor != NULL)
+                    {
+                        if (percorredor->direcao == "Elétrica" && percorredor->consumo == "Flex" )
+                        {
+                            rootBIFiltro = insertBI(rootBIFiltro, percorredor->placa); 
+                            percorredor = percorredor->prox;
+                        }else
+                        {
+                           percorredor = percorredor->prox; 
+                        }
+                    }
+                cout << "Pre-ordem:" << endl;
+                preOrder(rootBIFiltro);
+                cout << "\n------------\n" << endl;
+                printTree(rootBIFiltro,0);
                 break;
             
             default:
@@ -186,7 +223,6 @@ int main(int argc, char**argv){
         }
     } while (resp != 1);
     encerra_lista(cabeca); encerra_lista(placas);encerra_lista(pilha); encerra_lista(fila);
-    freeTree(rootAVL);
-    //freeTree(rootBI);
+    freeTree(rootAVL);freeTree(rootBI);freeTree(rootBIFiltro);freeTree(rootAVLFiltro);
     return 0;
 }
