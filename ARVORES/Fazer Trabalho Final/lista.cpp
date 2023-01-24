@@ -124,15 +124,15 @@ void busca(Cabecalho *cabeca, string placaexemplo){
 }
 
 void exclui(Cabecalho *cabeca,string placaexemplo){
-    Veiculo *percorredor;
+    Veiculo *visitor;
     Veiculo *ant;
-    percorredor = cabeca->inicio;
-    while(percorredor->placa != placaexemplo){
-        ant =percorredor;
-        percorredor = percorredor->prox;
+    visitor = cabeca->inicio;
+    while(visitor->placa != placaexemplo){
+        ant =visitor;
+        visitor = visitor->prox;
     }
-    ant->prox = percorredor->prox;
-    free(percorredor);   
+    ant->prox = visitor->prox;
+    free(visitor);   
     cabeca->tam--;
 }
 
