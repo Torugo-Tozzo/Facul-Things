@@ -1,3 +1,13 @@
+/*	
+	Victor Hugo Tozzo Filho	- 2020.1.08.018
+	Pedro Henrique Alves Barbosa - 2022.1.08.043
+	Rafael Silva Fortuna- 2022.1.08.026	
+	
+    !!!!!!AVISO IMPORTANTE!!!!!!
+    Nesta implementação de lista encadiada, 
+    o primeiro slot (o primeiro nó da lista), ficará sempre vazio, contendo valores nulos
+    ou seja a lista começa a partir do segundo nó
+*/
 # include <iostream>
 # include "avl.cpp"
 #include "lista.cpp"
@@ -51,6 +61,22 @@ int main(int argc, char**argv){
     Node *rootAVL = nullptr;
     Node *rootBI = nullptr;
     Veiculo *percorredor;
+
+            /* Fazendo inserção de todos os nós da arvore AVL */
+            percorredor = cabeca->inicio->prox;
+            while (percorredor != NULL)
+            {
+                rootAVL = insertAVL(rootAVL, stoi(percorredor->kilometragem));  
+                percorredor = percorredor->prox;
+            }
+
+            /*  Fazendo inserção de todos os nós da arvore BI */
+            percorredor = cabeca->inicio->prox;
+            while (percorredor != NULL)
+            {
+                rootBI = insertBI(rootBI, stoi(percorredor->kilometragem));  
+                percorredor = percorredor->prox;
+            }
 
     do{
         cout << "\n Digite : (1) para buscar\n Digite : (2) para adicionar\n Digite : (3) para relatórios\n Digite : (4) para empilhar carros (hidraulico add, eletrico rm)\n Digite : (5) para enfileirar carros (automatico add, manual rm)\n Digite : (6) para arvores\n Digite : (7) para sair\n";
@@ -106,10 +132,10 @@ int main(int argc, char**argv){
                         cout << "Digite o nome do arquivo \nExemplo: arquivo_exemplo.txt" << endl;
                         cin >> arq_name;
                         //função lê arquivo 
-                        leArq(guarda, "exemplo.txt");
+                        leArq(guarda, arq_name);
+                        cout << "Veiculos a serem incluidos:" << endl;
                         imprime(guarda);
                         //função insere
-                        cout << "---" << endl;
                         addLista(cabeca,guarda);
                         imprime(cabeca);
                      }
@@ -136,25 +162,13 @@ int main(int argc, char**argv){
             switch (arv1ou2)
             {
                 case 1:
-                /* Fazendo inserção de todos os nós da arvore */
-                percorredor = cabeca->inicio->prox;
-                 while (percorredor != NULL)
-            {
-                rootAVL = insertAVL(rootAVL, stoi(percorredor->kilometragem));  
-                percorredor = percorredor->prox;
-            }
             printTree(rootAVL,0);
+            cout << "AVL - pre ordem:" << endl;
             preorder(rootAVL);
                 break;
                 case 2:
-                /*  Fazendo inserção de todos os nós da arvore  */
-                percorredor = cabeca->inicio->prox;
-                     while (percorredor != NULL)
-            {
-                rootBI = insertBI(rootBI, stoi(percorredor->kilometragem));  
-                percorredor = percorredor->prox;
-            }
             printTree(rootBI,0);
+            cout << "Binaria - pre ordem:" << endl;
             preorder(rootBI);
                 break;
                 case 3:
@@ -165,8 +179,6 @@ int main(int argc, char**argv){
             default:
                 break;
             }
-        
-      
         break;
         case 7:
             salva(cabeca);
@@ -175,54 +187,7 @@ int main(int argc, char**argv){
         }
     } while (resp != 1);
     encerra_lista(cabeca); encerra_lista(placas);encerra_lista(pilha); encerra_lista(fila);
+    freeTree(rootAVL);
+    freeTree(rootBI);
 
-
-/*
-  Node *rootAVL = nullptr;
-
-  rootAVL = insertAVL(rootAVL, 1928);
-  rootAVL = insertAVL(rootAVL, 1700);
-  rootAVL = insertAVL(rootAVL, 1500);
-  rootAVL = insertAVL(rootAVL, 1444);
-  rootAVL = insertAVL(rootAVL, 2001);
-  rootAVL = insertAVL(rootAVL, 3000);
-
-  inorder(rootAVL);
-  std::cout << "\n---------" << std::endl;
-  postorder(rootAVL);
-  std::cout << "\n---------" << std::endl;
-  preorder(rootAVL);
-  std::cout << "\n---------" << std::endl;
-  
-  printTree(rootAVL, 0);
-
-  Node *root = nullptr;
-    // antes do balancemento AVL
-    root = insertBI(root,2);
-    insertBI(root, 3);
-    insertBI(root, 5);
-    insertBI(root, 4);
-    insertBI(root, 7);
-    insertBI(root, 11);
-    insertBI(root, 1);
-
-    std::cout << root->value << std::endl;
-    std::cout << root->right->value << std::endl;
-
-    printf("\n em ordem \n");
-
-    inorder(root);
-
-    printf("\n pre ordem \n");
-
-    preorder(root);
-
-    printf("\n pos ordem \n");
-
-    postorder(root);
-
-    printf("\n --------- \n");
-
-    printTree(root,0);
-*/
 }

@@ -18,5 +18,6 @@ void preorder(Node *root);
 void postorder(Node *root);
 Node* minValueNode(Node* node);
 Node* deleteNode(Node* root, int value);
+void freeTree(Node* node);
 void printTree(Node* node, int level);
 

@@ -192,7 +192,16 @@ return leftRotate(root);
 return root;
 }
 
-
+void freeTree(Node* node) {
+  if (node == nullptr) return;
+  
+  // Desaloca primeiro os nós filhos
+  freeTree(node->left);
+  freeTree(node->right);
+  
+  // Desaloca o nó atual
+  delete node;
+}
 
 void printTree(Node* node, int level) {
   if (node == nullptr) return;
