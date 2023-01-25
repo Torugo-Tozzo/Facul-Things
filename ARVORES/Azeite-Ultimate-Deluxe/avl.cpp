@@ -7,6 +7,20 @@
 using namespace std;
 
 template <typename T>
+bool search(Node<T>* node, T value) {
+    if (node == nullptr) {
+        return false;
+    }
+    if (node->value == value) {
+        return true;
+    }
+    if (value < node->value) {
+        return search(node->left, value);
+    }
+    return search(node->right, value);
+}
+
+template <typename T>
 int height(Node<T>* node) {
     if (node == nullptr) {
         return 0;

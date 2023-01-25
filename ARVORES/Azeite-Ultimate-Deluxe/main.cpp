@@ -102,7 +102,7 @@ int main(int argc, char**argv){
     leArq(cabeca,"BD_veiculos_2.txt");
 
     int resp, caso, caso1;
-    string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa;
+    string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa,ex;
     float preco;
 
     Node<string>* rootAVL = nullptr;
@@ -202,10 +202,18 @@ int main(int argc, char**argv){
         break;
         case 6:
             int arv1ou2;
-            cout << "  Digite : (1) para mostrar Arvore AVL de todos os veiculos \n  Digite : (2) para mostrar Arvore BINARIA de todos os veiculos \n  Digite : (3) para mostrar Arvore AVL de veiculos Automaticos que custam menos de 75000 \n  Digite : (4) para mostrar Arvore Binaria de veiculos flex com direção elétrica \n  Digite : (5) para mostrar Arvore AVL de todos preços\n  Digite : (6) para excluir um nó de uma das arvores" << endl;
+            cout << "  Digite : (0) para buscar na arvore\n  Digite : (1) para mostrar Arvore AVL de todos os veiculos \n  Digite : (2) para mostrar Arvore BINARIA de todos os veiculos \n  Digite : (3) para mostrar Arvore AVL de veiculos Automaticos que custam menos de 75000 \n  Digite : (4) para mostrar Arvore Binaria de veiculos flex com direção elétrica \n  Digite : (5) para mostrar Arvore AVL de todos preços\n  Digite : (6) para excluir um nó de uma das arvores" << endl;
             cin >> arv1ou2;
             switch (arv1ou2)
             {
+                case 0:
+                cout << "Digite a placa a ser buscada" << endl;
+                cin >> ex;
+                if(search(rootAVL, ex) == true){
+                cout << "Pertence a arvore!" << endl;
+                }else cout << "NÃO Pertence a arvore!" << endl;
+                break;
+
                 case 1:
                 printTree(rootAVL,0);
                 cout << "AVL Geral - pre ordem:" << endl;
