@@ -83,6 +83,7 @@ Node<T>* deleteNodeB(Node<T>* root, T value)
     return root;
 }
 
+
 int main(int argc, char**argv){
     
 
@@ -134,6 +135,8 @@ int main(int argc, char**argv){
             cin >> caso1;
             if(caso1 == 1){
                 exclui(cabeca,placa);
+                deleteNode(rootAVL,placa);
+                deleteNodeB(rootBI,placa);
             }
             break;
         case 2:
@@ -170,6 +173,8 @@ int main(int argc, char**argv){
                      cin >> preco;
             cout << "adicionando......\n";
             insere_fim(cabeca,modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa,preco);
+            insert(rootAVL,placa);
+            insertBI(rootBI,placa);
                      } else
                      {
                         string arq_name;
@@ -181,6 +186,14 @@ int main(int argc, char**argv){
                         imprime(guarda);
                         //função insere
                         addLista(cabeca,guarda);
+                        percorredor = cabeca->inicio->prox;
+                        while (percorredor != NULL)
+                        {
+                            rootAVL = insert(rootAVL, percorredor->placa);
+                            rootBI = insertBI(rootBI, percorredor->placa);  
+                            percorredor = percorredor->prox;
+                        }
+                        
                         imprime(cabeca);
                      }
         break;
